@@ -9,12 +9,12 @@ block content
       input.form-control.mr-sm-2(type='text', name='term', placeholder='Search', aria-label='Search', value=term)
 
     h1.main-title 
-      | Questions
+      | Event List
       if questions.total > 0
-        .small Total #{questions.total} question(s)
+        .small Total #{questions.total} Event(s)
 
     if questions.total <= 0 
-      .alert.alert-info No questions available yet
+      .alert.alert-info No Events available yet
     else
       .questions
         each question in questions.docs
@@ -25,4 +25,4 @@ block content
       +paginate(questions, '/questions', query)
 
     hr
-    a.btn.btn-primary(href='/questions/new') Ask Question
+    a.btn.btn-primary(href='/questions/new') Create Event

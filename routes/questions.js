@@ -1,5 +1,5 @@
 const express = require('express');
-const Question = require('../models/question');
+const Question = require('../models/question'); //스키마
 const Answer = require('../models/answer'); 
 const catchErrors = require('../lib/async-error');
 
