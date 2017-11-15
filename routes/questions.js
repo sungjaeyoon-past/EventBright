@@ -83,6 +83,10 @@ router.post('/', needAuth, catchErrors(async (req, res, next) => {
     title: req.body.title,
     author: user._id,
     content: req.body.content,
+    organizeName: req.body.organizeName,
+    organizeExp: req.body.organizeExp,
+    startedAt: req.body.startedAt,
+    finishedAt: req.body.finishedAt,
     tags: req.body.tags.split(" ").map(e => e.trim()),
   });
   await question.save();

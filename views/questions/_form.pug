@@ -1,9 +1,31 @@
 .form-group
-  label(for="title") Title
-  input.form-control(type="text", name="title", placeholder="What's your event?", value=question.title)
+  label(for="title") 제목
+  input.form-control(type="text", name="title", placeholder="제목을 입력해주세요.", value=question.title)
 .form-group
-  label(for="question") Event
+  .row
+    .col-md-3
+      label(for="organizeName") 조직 이름
+      textarea.form-control(name="organizeName", rows="1" )= question.organizeName
+    .col-md-9
+      label(for="organizeExp") 조직 설명
+      textarea.form-control(name="organizeExp", rows="1" )= question.organizeExp
+.form-group
+  .row
+    .col-md-2
+      label(for="pay") 참여 가격
+      select#inputState.form-control(name="pay", rows="1" )= question.pay
+        .choose-money
+          option(selected="money", name="money") 유료 
+          option(selected="free", name="free") 무료
+    .col-md-2
+      //if   
+      label(for="organizeExp") 가격
+      textarea.form-control(name="ticket", rows="1" )= question.ticket
+
+.form-group
+  label(for="question") 이벤트 내용
   textarea.form-control(name="content", rows="5")= question.content
+
 .form-group
-  label(for="tags") Tags
+  label(for="tags") 태그
   input.form-control(type="text", name="tags", placeholder="tags separated by spaces", value=question.tags ? question.tags.join(" ") : "")

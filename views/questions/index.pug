@@ -4,7 +4,7 @@ include ../includes/_paginate
 
 block content
   h1.main-title 
-    | Browse Event For You!  
+    | 이벤트를 찾아보세요!  
   .container
     form.form-inline.search-input-group(action='/questions', method='GET')
       i.fa.fa-search
@@ -12,18 +12,32 @@ block content
 
     h1.main-title 
       if questions.total > 0
-        .small Total #{questions.total} Event(s)
+        .small 총 #{questions.total} 개의 이벤트
 
     if questions.total <= 0 
-      .alert.alert-info No Events available yet
+      .alert.alert-info 아직 이벤트가 없습니다.
     else
       .questions
         each question in questions.docs
           .question
-            a.title(href=`/questions/${question.id}`)= question.title
+            .row
+              | 제목 : 
+              a.title(href=`/questions/${question.id}`)= question.title
+            .row
+              .col-md-4
+                | 주최 조직 : 
+                a.organizeName(href='')= question.organizeName
+                |  - 
+                a.organizeExp(href='')= question.organizeExp
+              .col-md-8
+                | 이벤트 기간 :
+                a.startedAt(href='')= question.startedAt
+                |  ~ 
+                a.startedAt(href='')= question.finishedAt
+
             include _question
 
       +paginate(questions, '/questions', query)
 
     hr
-    a.btn.btn-primary(href='/questions/new') Create Event
+    a.btn.btn-primary(href='/questions/new') 이벤트 생성하기

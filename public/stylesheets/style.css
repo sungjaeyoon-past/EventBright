@@ -86,13 +86,16 @@ a:hover {
 
 .question {
   line-height: 160%;
-  margin-bottom: 1em; }
+  margin-bottom: 5em; }
   .question .title {
-    font-size: 1.3rem; }
+    font-size: 1.3rem;
+    margin-bottom: 1em; }
   .question .content {
     color: #aaa; }
   .question .tags {
     margin: 0.5em 0; }
+  .question .organizeName {
+    text-align: center; }
 
 .author {
   text-align: right;

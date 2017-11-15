@@ -7,9 +7,10 @@
 }
 .question {
   line-height: 160%;
-  margin-bottom: 1em;
+  margin-bottom: 5em;
   .title {
     font-size: 1.3rem;
+    margin-bottom: 1em;
   }
   .content {
     color: #aaa;
@@ -17,8 +18,6 @@
   .tags {
     margin: 0.5em 0;
   }
-
-
 }
 .author {
   text-align: right;
@@ -34,6 +33,7 @@
   font-weight: bold;
   color: #0f5ca6;
 }
+
 .questions {
   .content {
     max-height: 5em;
