@@ -6,6 +6,13 @@ body {
   body > .main-content {
     min-height: 400px; }
 
+.card-text {
+  text-align: center; }
+
+.card-title {
+  text-align: center;
+  color: #0664f1; }
+
 a:hover {
   text-decoration: none; }
 
@@ -86,16 +93,17 @@ a:hover {
 
 .question {
   line-height: 160%;
-  margin-bottom: 5em; }
-  .question .title {
+  margin-bottom: 5em;
+  border-width: 2em;
+  border-color: black; }
+  .question pa
+.title {
     font-size: 1.3rem;
     margin-bottom: 1em; }
   .question .content {
     color: #aaa; }
   .question .tags {
     margin: 0.5em 0; }
-  .question .organizeName {
-    text-align: center; }
 
 .author {
   text-align: right;
