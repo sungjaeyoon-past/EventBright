@@ -145,4 +145,7 @@ a:hover {
     margin-bottom: 0.5em;
     color: #bbb; }
 
+.money-pay, .money-free {
+  margin-top: 1em; }
+
 /*# sourceMappingURL=style.css.map */

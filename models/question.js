@@ -23,11 +23,12 @@ var schema = new Schema({
   
   //장소<-맵
   //시작+종료 시간
-  startedAt: {type: Date, expires: 60*60*24, default: Date.now},
-  finishedAt: {type: Date, expires: 60*60*24, default: Date.now},
-  //이벤트 종류
+  startedAt: {type: Date, expires: 60*60*24},
+  finishedAt: {type: Date, expires: 60*60*24},
+  //이벤트 종류, 분야
+  eventSort:{type:String , default:" - "},
+  eventTopic:{type:String , default:" - "},
 
-  //이벤트 분야
   //이벤트 관련 사진
   //설문
 

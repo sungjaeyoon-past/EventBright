@@ -21,19 +21,27 @@ block content
         each question in questions.docs
           .question
             .row
-              | 제목 : 
+              | 이벤트 : 
               a.title(href=`/questions/${question.id}`)= question.title
             .row
               .col-md-4
                 | 주최 조직 : 
-                a.organizeName(href='')= question.organizeName
+                a.organizeName= question.organizeName
                 |  - 
-                a.organizeExp(href='')= question.organizeExp
+                a.organizeExp= question.organizeExp
               .col-md-8
                 | 이벤트 기간 :
-                a.startedAt(href='')= question.startedAt
+                a.startedAt()= question.startedAt
                 |  ~ 
-                a.startedAt(href='')= question.finishedAt
+                a.finishedAt()= question.finishedAt
+            .row
+              .col-md-8
+                | 이벤트 종류 :
+                a.eventSort=question.eventSort
+            .row
+              .col-md-4
+                | 이벤트 분야 :
+                a.eventTopic=question.eventTopic
 
             include _question
 

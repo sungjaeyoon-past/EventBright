@@ -12,15 +12,69 @@
 .form-group
   .row
     .col-md-2
-      label(for="pay") 참여 가격
-      select#inputState.form-control(name="pay", rows="1" )= question.pay
-        .choose-money
-          option(selected="money", name="money") 유료 
-          option(selected="free", name="free") 무료
+      label(for="sort") 이벤트 종류
+      select#inputState.form-control(name="eventSort", rows="1" )= question.eventSort
+        .choose-eventsort
+          option(selected="Apperance or Signing", name="eventSort") Apperance or Signing 
+          option(selected="Attraction ", name="eventSort") Attraction 
+          option(selected="Camp, Trip, or Retreat ", name="eventSort") Camp, Trip, or Retreat 
+          option(selected="Class, Training, or Workshop ", name="eventSort") Class, Training, or Workshop 
+          option(selected="Concert or Performance ", name="eventSort") Concert or Performance 
+          option(selected="Conference ", name="eventSort") Conference 
+          option(selected="Convention ", name="eventSort") Convention 
+          option(selected="Dinner or Gala ", name="eventSort") Dinner or Gala 
+          option(selected="Festival or Fair ", name="eventSort") Festival or Fair 
+          option(selected="Party or Social Gathering ", name="eventSort") Party or Social Gathering 
+          option(selected="Game or Competition ", name="eventSort") Game or Competition 
+          option(selected="Tradeshow, Consumer Show, or Expo", name="eventSort") Tradeshow, Consumer Show, or Expo
     .col-md-2
-      //if   
-      label(for="organizeExp") 가격
-      textarea.form-control(name="ticket", rows="1" )= question.ticket
+      label(for="sort") 이벤트 분야
+      select#inputState.form-control(name="eventTopic", rows="1" )= question.eventTopic
+        .choose-eventTopic
+          option(selected="Boat & Air", name="eventSort") Boat & Air
+          option(selected="Business & Professional", name="eventSort") Business & Professional
+          option(selected="Community & Culture", name="eventSort") Community & Culture
+          option(selected="Family & Education", name="eventSort") Family & Education
+          option(selected="Fashion & Beauty", name="eventSort") Fashion & Beauty
+          option(selected="Film, Media & Entertainment", name="eventSort") Film, Media & Entertainment
+          option(selected="Food & Drink", name="eventSort") Food & Drink
+          option(selected="Government & Politics", name="eventSort") Government & Politics
+          option(selected="Health & Wellness", name="eventSort") Health & Wellness
+          option(selected="Hobbies & Special Interest", name="eventSort") Hobbies & Special Interest
+          option(selected="Home & Lifestyle", name="eventSort") Home & Lifestyle
+          option(selected="Music", name="eventSort") Music
+.form-group
+  .row
+    .col-md-2
+      | 참여 비용
+    .col-md-2
+      | 가격
+  .row
+    .col-md-1
+      .money-pay
+        .form-check.form-check-inline
+          label.form-check-label(for="pay") 
+            input#inlineRadio1.form-check-input(type="radio", name="pay", value="option1")
+            |  유료
+    .col-md-1
+      .money-free
+        .form-check.form-check-inline
+          label.form-check-label(for="pay")
+            input#inlineRadio1.form-check-input(type="radio", name="pay", value="option2")
+            |  무료 
+    .col-md-2
+      .money-pay-ticket
+        label(for="organizeExp")
+        textarea.form-control(name="ticket", rows="1" )= question.ticket
+
+.form-group
+  .row
+    .col-md-2
+      label(for="startedAt") 시작 날짜
+      input.form-control(type="date", name="startedAt", value=question.startedAt)
+    .col-md-2
+      label(for="finishedAt") 종료 날짜
+      input.form-control(type="date", name="finishedAt", value=question.finishedAt)
 
 .form-group
   label(for="question") 이벤트 내용

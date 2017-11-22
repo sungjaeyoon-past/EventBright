@@ -85,6 +85,8 @@ router.post('/', needAuth, catchErrors(async (req, res, next) => {
     content: req.body.content,
     organizeName: req.body.organizeName,
     organizeExp: req.body.organizeExp,
+    eventSort:req.body.eventSort,
+    eventTopic:req.body.eventTopic,
     startedAt: req.body.startedAt,
     finishedAt: req.body.finishedAt,
     tags: req.body.tags.split(" ").map(e => e.trim()),
