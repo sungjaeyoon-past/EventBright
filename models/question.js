@@ -23,8 +23,8 @@ var schema = new Schema({
   
   //장소<-맵
   //시작+종료 시간
-  startedAt: {type: Date, expires: 60*60*24},
-  finishedAt: {type: Date, expires: 60*60*24},
+  startedAt: {type: String},
+  finishedAt: {type: String},
   //이벤트 종류, 분야
   eventSort:{type:String , default:" - "},
   eventTopic:{type:String , default:" - "},

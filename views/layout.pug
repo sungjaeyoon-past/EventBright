@@ -9,6 +9,7 @@ html
     script(src='https://code.jquery.com/jquery-3.2.1.min.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js')
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js')
+    script(src="//developers.kakao.com/sdk/js/kakao.min.js")
     script(src='/javascripts/application.js')
     script(src='/javascripts/money.js')
   body
@@ -24,7 +25,7 @@ html
             button.close(type='button', data-dismiss='alert', aria-label='close')
               span(aria-hidden='true') &times;
     block content
-
+    
     block footer
       include ./includes/footer
 

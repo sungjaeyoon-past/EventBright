@@ -12,7 +12,7 @@
 .form-group
   .row
     .col-md-2
-      label(for="sort") 이벤트 종류
+      label(for="eventSort") 이벤트 종류
       select#inputState.form-control(name="eventSort", rows="1" )= question.eventSort
         .choose-eventsort
           option(selected="Apperance or Signing", name="eventSort") Apperance or Signing 
@@ -26,29 +26,48 @@
           option(selected="Festival or Fair ", name="eventSort") Festival or Fair 
           option(selected="Party or Social Gathering ", name="eventSort") Party or Social Gathering 
           option(selected="Game or Competition ", name="eventSort") Game or Competition 
+          option(selected="Meeting or network event", name="eventSort") Meeting or network event
+          option(selected="Other", name="eventSort") Other
+          option(selected="Party or social gathering", name="eventSort") Party or social gathering
+          option(selected="Race or enduarance event", name="eventSort") Race or enduarance event
+          option(selected="Rally", name="eventSort") Rally
+          option(selected="Screening", name="eventSort") Screening
+          option(selected="Seminar or talk", name="eventSort") Seminar or talk
+          option(selected="Tour", name="eventSort") Tour
+          option(selected="Tournament, or Expo", name="eventSort") Tournament
           option(selected="Tradeshow, Consumer Show, or Expo", name="eventSort") Tradeshow, Consumer Show, or Expo
     .col-md-2
-      label(for="sort") 이벤트 분야
+      label(for="eventTopic") 이벤트 분야
       select#inputState.form-control(name="eventTopic", rows="1" )= question.eventTopic
         .choose-eventTopic
-          option(selected="Boat & Air", name="eventSort") Boat & Air
-          option(selected="Business & Professional", name="eventSort") Business & Professional
-          option(selected="Community & Culture", name="eventSort") Community & Culture
-          option(selected="Family & Education", name="eventSort") Family & Education
-          option(selected="Fashion & Beauty", name="eventSort") Fashion & Beauty
+          option(selected="Boat & Air", name="eventTopic") Boat & Air
+          option(selected="Business & Professional", name="eventTopic") Business & Professional
+          option(selected="Community & Culture", name="eventTopic") Community & Culture
+          option(selected="Family & Education", name="eventTopic") Family & Education
+          option(selected="Fashion & Beauty", name="eventTopic") Fashion & Beauty
           option(selected="Film, Media & Entertainment", name="eventSort") Film, Media & Entertainment
           option(selected="Food & Drink", name="eventSort") Food & Drink
-          option(selected="Government & Politics", name="eventSort") Government & Politics
-          option(selected="Health & Wellness", name="eventSort") Health & Wellness
-          option(selected="Hobbies & Special Interest", name="eventSort") Hobbies & Special Interest
-          option(selected="Home & Lifestyle", name="eventSort") Home & Lifestyle
-          option(selected="Music", name="eventSort") Music
+          option(selected="Government & Politics", name="eventTopic") Government & Politics
+          option(selected="Health & Wellness", name="eventTopic") Health & Wellness
+          option(selected="Hobbies & Special Interest", name="eventTopic") Hobbies & Special Interest
+          option(selected="Home & Lifestyle", name="eventTopic") Home & Lifestyle
+          option(selected="Music", name="eventTopic") Music
+          option(selected="Other", name="eventTopic") Other
+          option(selected="Performence & visual art", name="eventTopic") Performence & visual art
+          option(selected="Religion & Spritually", name="eventTopic") Religion & Spritually
+          option(selected="School Activities", name="eventTopic") School Activities
+          option(selected="Science Technology", name="eventTopic") Science & Technology
+          option(selected="Seasonal & holliday", name="eventTopic") Seasonal & holliday
+          option(selected="Sport & Fitness", name="eventTopic") Sport & Fitness
+          option(selected="Travel & Outdoor", name="eventTopic") Travel & Outdoor
+
 .form-group
   .row
     .col-md-2
       | 참여 비용
     .col-md-2
-      | 가격
+      .money-pay-ticket
+        | 가격
   .row
     .col-md-1
       .money-pay
@@ -64,8 +83,21 @@
             |  무료 
     .col-md-2
       .money-pay-ticket
-        label(for="organizeExp")
+        label(for="ticket")
         textarea.form-control(name="ticket", rows="1" )= question.ticket
+.form-group
+  .row
+    | 장소
+  .row
+    #map(style='width:400px;height:300px;')
+    script(src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9988bdec902aa90206eb2a63e3510b1a&libraries=services,clusterer,drawing")
+    script.
+      var container = document.getElementById('map');
+      var options = {
+      center: new daum.maps.LatLng(33.450701, 126.570667),
+      level: 3
+      };
+      var map = new daum.maps.Map(container, options);
 
 .form-group
   .row

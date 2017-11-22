@@ -17,6 +17,20 @@ block content
         dd.col-sm-9
           img.img-fluid.rounded-circle(src= user.facebook.photo)
 
+      a#kakao-login-btn
+        a(href='http://developers.kakao.com/logout')
+        script(type='text/javascript').
+          Kakao.init('9988bdec902aa90206eb2a63e3510b1a');
+          Kakao.Auth.createLoginButton({
+          container: '#kakao-login-btn',
+          success: function(authObj) {
+          alert(JSON.stringify(authObj));
+          },
+          fail: function(err) {
+          alert(JSON.stringify(err));
+          }
+          });
+
     hr
     p
       a.btn.btn-outline-secondary(href='/users/') List

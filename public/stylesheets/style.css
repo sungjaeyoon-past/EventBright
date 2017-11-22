@@ -1,4 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat|Raleway");
+a > #kakao-login-btn {
+  margin-top: 1em; }
+
 body {
   font: 1rem 'Montserrat', sans-serif;
   margin-top: 50px;
@@ -96,10 +99,10 @@ a:hover {
   margin-bottom: 5em;
   border-width: 2em;
   border-color: black; }
-  .question pa
-.title {
-    font-size: 1.3rem;
-    margin-bottom: 1em; }
+  .question .title {
+    font-size: 1.9rem;
+    margin-bottom: 1em;
+    color: lightseagreen; }
   .question .content {
     color: #aaa; }
   .question .tags {

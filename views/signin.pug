@@ -25,6 +25,20 @@ block content
           i.fa.fa-facebook.fa-lg
           | &nbsp;
           | Signin with Facebook
+        .container(style="margin-top:0.5em;")
+          a#kakao-login-btn
+          a(href='http://developers.kakao.com/logout')
+          script(type='text/javascript').
+            Kakao.init('3ddda16fd4d17ed98bd4ad7c2535ccfb');
+            Kakao.Auth.createLoginButton({
+            container: '#kakao-login-btn',
+            success: function(authObj) {
+            alert(JSON.stringify(authObj));
+            },
+            fail: function(err) {
+            alert(JSON.stringify(err));
+            }
+            });
 
         div.sub 
           a(href='/users/new') Signup

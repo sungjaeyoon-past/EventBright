@@ -24,24 +24,27 @@ block content
               | 이벤트 : 
               a.title(href=`/questions/${question.id}`)= question.title
             .row
-              .col-md-4
-                | 주최 조직 : 
+              .col-md-5
+                | 조직 : 
                 a.organizeName= question.organizeName
                 |  - 
                 a.organizeExp= question.organizeExp
-              .col-md-8
-                | 이벤트 기간 :
-                a.startedAt()= question.startedAt
+              .col-md-7
+                | 기간 :
+                a.startedAt= question.startedAt
                 |  ~ 
-                a.finishedAt()= question.finishedAt
+                a.finishedAt= question.finishedAt
             .row
-              .col-md-8
-                | 이벤트 종류 :
+              .col-md-5
+                | 종류 :
                 a.eventSort=question.eventSort
-            .row
-              .col-md-4
-                | 이벤트 분야 :
+              .col-md-7
+                | 분야 :
                 a.eventTopic=question.eventTopic
+            
+            .row
+              .col-md-2
+                |
 
             include _question
 
