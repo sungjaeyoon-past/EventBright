@@ -1,15 +1,47 @@
-.content= question.content
+.container
+  .alert.alert-success
+    .row
+      .col-md-5
+        | 조직 : 
+        a.organizeName= question.organizeName
+        |  - 
+        a.organizeExp= question.organizeExp
+      .col-md-7
+        | 기간 :
+        a.startedAt= question.startedAt
+        |  ~ 
+        a.finishedAt= question.finishedAt
+    .row
+      .col-md-5
+        | 종류 :
+        a.eventSort=question.eventSort
+      .col-md-7
+        | 분야 :
+        a.eventTopic=question.eventTopic
+
+    .row
+      .col-md-5
+        | 최대 인원 : 
+        a.maxPeople=question.maxPeople
+      .col-md-7
+        | 가격 :
+        a.ticket=question.ticket
+
+
 .tags.badges
+  
   each tag in question.tags
     span.badge.badge-phill.badge-secondary= tag
     | 
 .row
-  .col-sm
+  .col-md-1
+  .col-md-5
     .numbers.
-      #[span.number.num-votes= question.numLikes] likes,
-      #[span.number.num-answers= question.numAnswers] answers,
-      #[span.number.num-views= question.numReads] reads
-  .col-sm
+      #[span.number.num-votes= question.numLikes] likes ,
+      #[span.number.num-answers= question.numAnswers] answers ,
+      #[span.number.num-views= question.numReads] reads ,
+      #[span.number.num-participate= question.numParticipate] 신청인원
+  .col-md-5
     .author
       | asked on #{moment(question.createdAt).format('YYYY-MM-DD')}
       if question.author

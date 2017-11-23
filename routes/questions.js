@@ -89,6 +89,8 @@ router.post('/', needAuth, catchErrors(async (req, res, next) => {
     eventTopic:req.body.eventTopic,
     startedAt: req.body.startedAt,
     finishedAt: req.body.finishedAt,
+    ticket: req.body.ticket,
+    maxPeople: req.body.maxPeople,
     tags: req.body.tags.split(" ").map(e => e.trim()),
   });
   await question.save();
@@ -118,6 +120,10 @@ router.post('/:id/answers', needAuth, catchErrors(async (req, res, next) => {
   res.redirect(`/questions/${req.params.id}`);
 }));
 
+//참여신청
+//router.post('/:id/participate', needAuth, catchErrors(async (req, res, next) => {
+ // 
+//}));
 
 
 module.exports = router;

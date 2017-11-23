@@ -20,6 +20,8 @@ var schema = new Schema({
   ticket:{type:Number, default:0},
 
   //참여자 및 참여자 수?
+  maxPeople:{type:Number, default:100},
+  numParticipate:{type:Number, default:0},
   
   //장소<-맵
   //시작+종료 시간

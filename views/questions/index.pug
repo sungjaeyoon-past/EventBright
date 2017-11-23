@@ -21,31 +21,8 @@ block content
         each question in questions.docs
           .question
             .row
-              | 이벤트 : 
               a.title(href=`/questions/${question.id}`)= question.title
-            .row
-              .col-md-5
-                | 조직 : 
-                a.organizeName= question.organizeName
-                |  - 
-                a.organizeExp= question.organizeExp
-              .col-md-7
-                | 기간 :
-                a.startedAt= question.startedAt
-                |  ~ 
-                a.finishedAt= question.finishedAt
-            .row
-              .col-md-5
-                | 종류 :
-                a.eventSort=question.eventSort
-              .col-md-7
-                | 분야 :
-                a.eventTopic=question.eventTopic
             
-            .row
-              .col-md-2
-                |
-
             include _question
 
       +paginate(questions, '/questions', query)
