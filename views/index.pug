@@ -20,24 +20,29 @@ block content
           img.card-img-top(src="/images/bg-1.jpg", alt="Card image cap")
           .card-body
             h4.card-title
-              button.btn.btn-outline-primary.btn-lg(type="button") Create!
+              a(href="/questions/new")
+                button.btn.btn-outline-primary.btn-lg(type="button", href="/questions/new") Create!
             p.card-text
               | 공지하고 싶은 이벤트를 생성하세요!
         .card
           img.card-img-top(src="/images/bg-2.jpg", alt="Card image cap")
           .card-body
             h4.card-title
-              button.btn.btn-outline-warning.btn-lg(type="button") Browse!
+              a(href="/questions")
+                button.btn.btn-outline-warning.btn-lg(type="button") Browse!
             p.card-text
               | 참여하고 싶은 이벤트를 검색하세요!
         .card
           img.card-img-top(src="/images/bg-3.jpg", alt="Card image cap")
           .card-body
             h4.card-title
-              button.btn.btn-outline-success.btn-lg(type="button") Apply!
+              a(href="/recommend")
+                button.btn.btn-outline-success.btn-lg(type="button") Recommend!
             p.card-text
-              | 이벤트에 참여신청하세요!
+              | 이벤트를 추천해 드릴게요!
     .col-md-2
+
+
      
      
 
