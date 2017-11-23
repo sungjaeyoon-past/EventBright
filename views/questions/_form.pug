@@ -94,7 +94,7 @@
   .row
     #map(style='width:100%;height:250px;')
     #clickLatlng
-    script(type='text/javascript', src='//dapi.kakao.com/v2/maps/sdk.js?appkey=9988bdec902aa90206eb2a63e3510b1a')
+    script(type='text/javascript', src='//dapi.kakao.com/v2/maps/sdk.js?appkey=9988bdec902aa90206eb2a63e3510b1a&libraries=services')
     script.
       var mapContainer = document.getElementById('map'), // 지도를 표시할 div
       mapOption = {
@@ -121,7 +121,6 @@
       var resultDiv = document.getElementById('clickLatlng');
       resultDiv.innerHTML = message;
       });
-
 
 .form-group
   .row

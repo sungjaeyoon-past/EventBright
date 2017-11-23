@@ -22,6 +22,7 @@ var schema = new Schema({
   //참여자 및 참여자 수?
   maxPeople:{type:Number, default:100},
   numParticipate:{type:Number, default:0},
+  participateName:{type:Array},
   
   //장소<-맵
   //시작+종료 시간

@@ -50,10 +50,11 @@ router.get('/:id/edit', needAuth, catchErrors(async (req, res, next) => {
 router.get('/:id', catchErrors(async (req, res, next) => {
   const question = await Question.findById(req.params.id).populate('author');
   const answers = await Answer.find({question: question.id}).populate('author');
+  const participates=await Participate.find({question: question.id}).populate('author'); //
   question.numReads++;    // TODO: 동일한 사람이 본 경우에 Read가 증가하지 않도록???
 
   await question.save();
-  res.render('questions/show', {question: question, answers: answers});
+  res.render('questions/show', {question: question, answers: answers, participates: participates});//
 }));
 
 router.put('/:id', catchErrors(async (req, res, next) => {
@@ -125,11 +126,18 @@ router.post('/:id/answers', needAuth, catchErrors(async (req, res, next) => {
 router.post('/:id/participate', needAuth, catchErrors(async (req, res, next) => {
   const user = req.user;
   const question = await Question.findById(req.params.id);
-  var participate = new Participate({
-    author:user._id,
-  });
-  await participate.save();
+
+  if (!question) {
+    req.flash('danger', 'Not exist question');
+    return res.redirect('back');
+  }
+
   if(question.maxPeople>question.numParticipate){
+    var participate = new Participate({
+      author: user._id,
+      question: question._id
+    });
+    await participate.save();
     question.numParticipate++;
     req.flash('success', '참여 신청 완료');
   }else{
