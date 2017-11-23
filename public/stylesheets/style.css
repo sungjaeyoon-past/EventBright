@@ -94,6 +94,9 @@ a:hover {
   font-size: 1rem;
   color: #bbb; }
 
+.btn-success {
+  margin-left: 0.3em; }
+
 .question {
   line-height: 160%;
   margin-bottom: 5em;

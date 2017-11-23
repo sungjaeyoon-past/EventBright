@@ -1,6 +1,7 @@
 const express = require('express');
 const Question = require('../models/question'); //스키마
-const Answer = require('../models/answer'); 
+const Answer = require('../models/answer');
+const Participate = require('../models/participate');
 const catchErrors = require('../lib/async-error');
 
 const router = express.Router();
@@ -121,9 +122,22 @@ router.post('/:id/answers', needAuth, catchErrors(async (req, res, next) => {
 }));
 
 //참여신청
-//router.post('/:id/participate', needAuth, catchErrors(async (req, res, next) => {
- // 
-//}));
+router.post('/:id/participate', needAuth, catchErrors(async (req, res, next) => {
+  const user = req.user;
+  const question = await Question.findById(req.params.id);
+  var participate = new Participate({
+    author:user._id,
+  });
+  await participate.save();
+  if(question.maxPeople>question.numParticipate){
+    question.numParticipate++;
+    req.flash('success', '참여 신청 완료');
+  }else{
+    req.flash('danger', '참여 인원 초과');
+  }
+  await question.save();
+  res.redirect('back');
+}));
 
 
 module.exports = router;
