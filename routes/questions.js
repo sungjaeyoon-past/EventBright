@@ -131,19 +131,23 @@ router.post('/:id/participate', needAuth, catchErrors(async (req, res, next) => 
     req.flash('danger', 'Not exist question');
     return res.redirect('back');
   }
-
-  if(question.maxPeople>question.numParticipate){
-    var participate = new Participate({
-      author: user._id,
-      question: question._id
-    });
-    await participate.save();
-    question.numParticipate++;
-    req.flash('success', '참여 신청 완료');
+  var finduser = await Participate.findOne({author: req.user._id, question: question._id});//??
+  if (!finduser){//추가
+    if(question.maxPeople>question.numParticipate){
+      var participate = new Participate({
+        author: user._id,
+        question: question._id
+      }); 
+      await participate.save();
+      question.numParticipate++;
+      req.flash('success', '참여 신청 완료');
+    }else{
+      req.flash('danger', '참여 인원 초과');
+    }
+    await question.save();
   }else{
-    req.flash('danger', '참여 인원 초과');
+      req.flash('danger', '이미 신청되었음!');
   }
-  await question.save();
   res.redirect('back');
 }));
 
