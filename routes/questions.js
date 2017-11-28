@@ -16,6 +16,40 @@ function needAuth(req, res, next) {
   }
 }
 
+
+function validateForm(form, options) {
+  var title = form.title || "";
+  var organizeName = form.organizeName || "";
+  var organizeExp = form.organizeExp || "";
+  var maxPeople = form.maxPeople || "";
+  var startedAt = form.startedAt || "";
+  var finishedAt = form.finishedAt || "";
+  var content = form.content || "";
+
+  if (!title) {
+    return '제목을 입력해주세요!';
+  }
+  if (!organizeName) {
+    return '조직이름을 입력해주세요!';
+  }
+  if (!organizeExp) {
+    return '조직설명을 입력해주세요!';
+  }
+  if (!maxPeople) {
+    return '최대인원을 입력해주세요!';
+  }
+  if (!startedAt) {
+    return '시작 날짜를 입력해주세요!';
+  }
+  if (!finishedAt) {
+    return '종료 날짜를 입력해주세요!';
+  }
+  if (!content) {
+    return '이벤트 내용을 입력해주세요!';
+  }
+  return null;
+}
+
 /* GET questions listing. */
 //검색창
 router.get('/', catchErrors(async (req, res, next) => {
@@ -81,6 +115,11 @@ router.delete('/:id', needAuth, catchErrors(async (req, res, next) => {
 
 router.post('/', needAuth, catchErrors(async (req, res, next) => {
   const user = req.user;
+  const err = validateForm(req.body);
+  if (err) {
+    req.flash('danger', err);
+    return res.redirect('back');
+  }
   var question = new Question({
     title: req.body.title,
     author: user._id,

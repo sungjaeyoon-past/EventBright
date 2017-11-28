@@ -6,9 +6,9 @@ var schema = new Schema({
   //작성자
   author: { type: Schema.Types.ObjectId, ref: 'User' },
   //조직 이름
-  organizeName: {type: String, trim:true/*, required: true*/},
+  organizeName: {type: String, trim:true, required: true},
   //조직 설명
-  organizeExp: {type:String, trim: true/*, required:true*/},
+  organizeExp: {type:String, trim: true, required:true},
   //제목
   title: {type: String, trim: true, required: true},
   //내용

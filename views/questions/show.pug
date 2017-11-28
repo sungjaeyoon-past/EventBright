@@ -44,9 +44,9 @@ block content
 
     form(action=`/questions/${question.id}/answers`, method='POST')
       .form-group
-        label(for='answer') Your Answer
+        label(for='answer') 질문
         textarea.form-control(name="content", rows="5")
-      button.btn.btn-primary(type="submit") Post Your Answer
+      button.btn.btn-primary(type="submit") 질문하기
 
   script(src='/javascripts/question_client.js')
 
