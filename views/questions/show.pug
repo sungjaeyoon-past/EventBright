@@ -49,10 +49,16 @@ block content
                     td
                       a #{parPeople.author.email}
 
-      hr         
-    .alert.alert-secondary
+    ul.nav.nav-tabs
+      .show-answer
+        li.nav-item
+          a.nav-link.active 질문 보기
+      .show-review
+        li.nav-item
+          a.nav-link.active 후기 보기
+    hr         
+    .all-answer.alert.alert-secondary
       if question.numAnswers > 0
-        hr
         h3 #{question.numAnswers} Answer(s)
         .answers.show
           each answer in answers
@@ -64,17 +70,16 @@ block content
           textarea.form-control(name="content", rows="5")
         button.btn.btn-primary(type="submit") 질문하기
     
-    .alert.alert-secondary
-      if question.numAnswers > 0
-        hr
-        h3 #{question.numAnswers} Answer(s)
+    .all-review.alert.alert-secondary
+      if question.numReviews > 0
+        h3 #{question.numReviews} Review(s)
         .answers.show
-          each answer in answers
-            include _answer
+          each review in reviews
+            include _review
 
-      form(action=`/questions/${question.id}/answers`, method='POST')
+      form(action=`/questions/${question.id}/reviews`, method='POST')
         .form-group
-          label(for='answer') 이벤트 후기
+          label(for='review') 이벤트 후기
           textarea.form-control(name="content", rows="5")
         button.btn.btn-primary(type="submit") 후기 작성하기
 

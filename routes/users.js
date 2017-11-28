@@ -101,7 +101,8 @@ router.delete('/:id', needAuth, catchErrors(async (req, res, next) => {
 
 router.get('/:id', catchErrors(async (req, res, next) => {
   const user = await User.findById(req.params.id);
-  //const likeLog = await Likelog.find({});
+  const likeLog = await Likelog.find({});
+  console.log(likeLog);
   res.render('users/show', {user: user/*, likelog: likelog*/});
 }));
 

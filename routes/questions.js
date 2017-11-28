@@ -1,6 +1,7 @@
 const express = require('express');
 const Question = require('../models/question'); //스키마
 const Answer = require('../models/answer');
+const Review = require('../models/review');
 const Participate = require('../models/participate');
 const catchErrors = require('../lib/async-error');
 
@@ -88,11 +89,12 @@ router.get('/:id/edit', needAuth, catchErrors(async (req, res, next) => {
 router.get('/:id', catchErrors(async (req, res, next) => {
   const question = await Question.findById(req.params.id).populate('author');
   const answers = await Answer.find({question: question.id}).populate('author');
+  const reviews = await Review.find({question: question.id}).populate('author');
   const participates=await Participate.find({question: question.id}).populate('author'); //
   question.numReads++;    // TODO: 동일한 사람이 본 경우에 Read가 증가하지 않도록???
 
   await question.save();
-  res.render('questions/show', {question: question, answers: answers, participates: participates});//
+  res.render('questions/show', {question: question, answers: answers, reviews:reviews, participates: participates});//
 }));
 
 router.put('/:id', catchErrors(async (req, res, next) => {
@@ -178,6 +180,28 @@ router.post('/:id/answers', needAuth, catchErrors(async (req, res, next) => {
   });
   await answer.save();
   question.numAnswers++;
+  await question.save();
+
+  req.flash('success', 'Successfully answered');
+  res.redirect(`/questions/${req.params.id}`);
+}));
+
+router.post('/:id/reviews', needAuth, catchErrors(async (req, res, next) => {
+  const user = req.user;
+  const question = await Question.findById(req.params.id);
+
+  if (!question) {
+    req.flash('danger', 'Not exist question');
+    return res.redirect('back');
+  }
+
+  var review = new Review({
+    author: user._id,
+    question: question._id,
+    content: req.body.content
+  });
+  await review.save();
+  question.numReviews++;
   await question.save();
 
   req.flash('success', 'Successfully answered');
