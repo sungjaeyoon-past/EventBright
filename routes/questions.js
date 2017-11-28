@@ -25,6 +25,7 @@ function validateForm(form, options) {
   var startedAt = form.startedAt || "";
   var finishedAt = form.finishedAt || "";
   var content = form.content || "";
+  var lat= form.content || "";
 
   if (!title) {
     return '제목을 입력해주세요!';
@@ -37,6 +38,9 @@ function validateForm(form, options) {
   }
   if (!maxPeople) {
     return '최대인원을 입력해주세요!';
+  }
+  if(!lat){
+    return '위치를 입력해주세요!';
   }
   if (!startedAt) {
     return '시작 날짜를 입력해주세요!';
@@ -98,9 +102,26 @@ router.put('/:id', catchErrors(async (req, res, next) => {
     req.flash('danger', 'Not exist question');
     return res.redirect('back');
   }
+  /*
+  const err = validateForm(req.body);
+  if (err) {
+    req.flash('danger', err);
+    return res.redirect('back');
+  }
+  */
   question.title = req.body.title;
+  question.organizeName = req.body.organizeName;
+  question.organizeExp = req.body.organizeExp;
+  question.eventSort = req.body.eventSort;
+  question.eventTopic = req.body.eventTopic;
+  question.lat=req.body.lat,
+  question.lng=req.body.lng,
+  question.startedAt = req.body.startedAt;
+  question.finishedAt = req.body.finishedAt;
+  question.ticket = req.body.ticket;
+  question.maxPeople = req.body.maxPeople;
   question.content = req.body.content;
-  question.tags = req.body.tags.split(" ").map(e => e.trim());
+  //question.tags = req.body.tags.split(" ").map(e => e.trim());
 
   await question.save();
   req.flash('success', 'Successfully updated');
@@ -128,6 +149,8 @@ router.post('/', needAuth, catchErrors(async (req, res, next) => {
     organizeExp: req.body.organizeExp,
     eventSort:req.body.eventSort,
     eventTopic:req.body.eventTopic,
+    lat:req.body.lat,
+    lng:req.body.lng,
     startedAt: req.body.startedAt,
     finishedAt: req.body.finishedAt,
     ticket: req.body.ticket,
@@ -170,7 +193,7 @@ router.post('/:id/participate', needAuth, catchErrors(async (req, res, next) => 
     req.flash('danger', 'Not exist question');
     return res.redirect('back');
   }
-  var finduser = await Participate.findOne({author: req.user._id, question: question._id});//??
+  var finduser = await Participate.findOne({email: req.user._id, question: question._id});//??
   if (!finduser){//추가
     if(question.maxPeople>question.numParticipate){
       var participate = new Participate({

@@ -10,6 +10,8 @@ block content
           | 이벤트 내용 
           .content= question.content
         include _question
+      
+        include map
 
       .buttons
         if currentUser
@@ -23,17 +25,29 @@ block content
           | 
           a.btn.btn-outline-danger.need-confirm-btn(href=`/questions/${question.id}?_method=delete`) Delete
           |
-
-          .container
-            | 참여 명단 :
+      hr
+      .container
+        .alert.alert-primary(style="width:9em; text-align:center")
+          | 참여 명단 
+        table.table
+          thead.thead-dark
+            tr
+              th(scope="col") #
+              |       
+              th(scope="col") Name
+              |       
+              th(scope="col") Email
+          |   
+          tbody
             each parPeople in participates
-              .card(style="width:30em;")
-                .card-header
-                  | 이 름 :
-                  a #{parPeople.author.name}
-                .card-body
-                  p.card-text(style="text-align:left;") email : #{parPeople.author.email} 
-                  a.btn.btn-primary(href=`/users/${parPeople.author.id}`) 상세정보       
+              tr
+                th(scope="row")
+                td
+                  a #{parPeople.author.name}       
+                td
+                  a #{parPeople.author.email}
+
+      hr         
 
     if question.numAnswers > 0
       hr

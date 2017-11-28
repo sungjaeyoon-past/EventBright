@@ -3,36 +3,23 @@ const mongoosePaginate = require('mongoose-paginate');
 const Schema = mongoose.Schema;
 
 var schema = new Schema({
-  //작성자
   author: { type: Schema.Types.ObjectId, ref: 'User' },
-  //조직 이름
-  organizeName: {type: String, trim:true, required: true},
-  //조직 설명
-  organizeExp: {type:String, trim: true, required:true},
-  //제목
-  title: {type: String, trim: true, required: true},
-  //내용
-  content: {type: String, trim: true, required: true},
-
-  //무료=0 or 유료=1
+  organizeName: {type: String, trim:true},
+  organizeExp: {type:String, trim: true},
+  title: {type: String, trim: true},
+  content: {type: String, trim: true},
   pay:{type:Boolean , default:0},
-  //티켓 가격
   ticket:{type:Number, default:0},
-
-  //참여자 및 참여자 수?
   maxPeople:{type:Number, default:100},
   numParticipate:{type:Number, default:0},
   participateName:{type:Array},
-  
-  //장소<-맵
-  //시작+종료 시간
+ // img:{type:String},
   startedAt: {type: String},
   finishedAt: {type: String},
-  //이벤트 종류, 분야
   eventSort:{type:String , default:" - "},
   eventTopic:{type:String , default:" - "},
-
-  //이벤트 관련 사진
+  lat:{type:String},
+  lng:{type:String},
   //설문
 
   tags: [String],

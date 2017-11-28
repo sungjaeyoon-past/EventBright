@@ -90,7 +90,7 @@
         textarea.form-control(name="ticket", rows="1" )= question.ticket
 .form-group
   .row
-    | 이벤트 장소 : 지도를 클릭해주세요!
+    | 이벤트 장소 : 장소를 클릭해주세요!
   .row
     #map(style='width:100%;height:250px;')
     #clickLatlng
@@ -116,11 +116,22 @@
       var latlng = mouseEvent.latLng;
       // 마커 위치를 클릭한 위치로 옮깁니다
       marker.setPosition(latlng);
-      var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
-      message += '경도는 ' + latlng.getLng() + ' 입니다';
-      var resultDiv = document.getElementById('clickLatlng');
-      resultDiv.innerHTML = message;
+      var lat=latlng.getLat();//위도
+      var lng=latlng.getLng();//경도
+      $("#form-lat").val(lat);
+      $("#form-lng").val(lng);
       });
+  .form-group
+  .row
+    .col-md-2
+      .lat
+        label(for="lat") 위도
+        input.form-control(type="text", id="form-lat", name="lat", value=question.startedAt)
+    .col-md-2
+      .lng
+        label(for="lng") 경도
+        input.form-control(type="text", id="form-lng",name="lng", value=question.finishedAt)
+
 
 .form-group
   .row

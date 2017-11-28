@@ -2,6 +2,9 @@ const express = require('express');
 const User = require('../models/user');
 const router = express.Router();
 const catchErrors = require('../lib/async-error');
+const Question = require('../models/question'); 
+const Likelog = require('../models/like-log'); 
+
 
 function needAuth(req, res, next) {
   if (req.isAuthenticated()) {
@@ -43,6 +46,12 @@ function validateForm(form, options) {
 
 /* GET users listing. */
 router.get('/', needAuth, catchErrors(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+  console.log(user);
+  if(!user){
+    req.flash('danger', '관리자만 가능!');
+    res.redirect('back');
+  }
   const users = await User.find({});
   res.render('users/index', {users: users});
 }));
@@ -92,7 +101,8 @@ router.delete('/:id', needAuth, catchErrors(async (req, res, next) => {
 
 router.get('/:id', catchErrors(async (req, res, next) => {
   const user = await User.findById(req.params.id);
-  res.render('users/show', {user: user});
+  //const likeLog = await Likelog.find({});
+  res.render('users/show', {user: user/*, likelog: likelog*/});
 }));
 
 router.post('/', catchErrors(async (req, res, next) => {
