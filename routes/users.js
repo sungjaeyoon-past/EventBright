@@ -46,9 +46,9 @@ function validateForm(form, options) {
 
 /* GET users listing. */
 router.get('/', needAuth, catchErrors(async (req, res, next) => {
-  const user = await User.findById(req.params.id);
-  console.log(user);
-  if(!user){
+  const adminUserId = req.user._id;
+  console.log(adminUserId);
+  if(adminUserId!="5a1d9b01a84473469045a6a7" && adminUserId!="5a1db1a4ab28df364c9ab8c2" ){
     req.flash('danger', '관리자만 가능!');
     res.redirect('back');
   }

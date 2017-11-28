@@ -6,11 +6,13 @@ block content
 
     .question.show
       .container
-        .alert.alert-secondary
+        .btn.btn-outline-secondary
           | 이벤트 내용 
+        .alert.alert-secondary
           .content= question.content
+      .container
         include _question
-      
+      .container
         include map
 
       .buttons
@@ -25,42 +27,56 @@ block content
           | 
           a.btn.btn-outline-danger.need-confirm-btn(href=`/questions/${question.id}?_method=delete`) Delete
           |
-      hr
-      .container
-        .alert.alert-primary(style="width:9em; text-align:center")
-          | 참여 명단 
-        table.table
-          thead.thead-dark
-            tr
-              th(scope="col") #
-              |       
-              th(scope="col") Name
-              |       
-              th(scope="col") Email
-          |   
-          tbody
-            each parPeople in participates
-              tr
-                th(scope="row")
-                td
-                  a #{parPeople.author.name}       
-                td
-                  a #{parPeople.author.email}
+          hr
+          .container
+            .alert.alert-primary(style="width:9em; text-align:center")
+              | 참여 명단 
+            table.table
+              thead.thead-dark
+                tr
+                  th(scope="col") #
+                  |       
+                  th(scope="col") Name
+                  |       
+                  th(scope="col") Email
+              |   
+              tbody
+                each parPeople in participates
+                  tr
+                    th(scope="row")
+                    td
+                      a #{parPeople.author.name}       
+                    td
+                      a #{parPeople.author.email}
 
       hr         
+    .alert.alert-secondary
+      if question.numAnswers > 0
+        hr
+        h3 #{question.numAnswers} Answer(s)
+        .answers.show
+          each answer in answers
+            include _answer
 
-    if question.numAnswers > 0
-      hr
-      h3 #{question.numAnswers} Answer(s)
-      .answers.show
-        each answer in answers
-          include _answer
+      form(action=`/questions/${question.id}/answers`, method='POST')
+        .form-group
+          label(for='answer') 질문
+          textarea.form-control(name="content", rows="5")
+        button.btn.btn-primary(type="submit") 질문하기
+    
+    .alert.alert-secondary
+      if question.numAnswers > 0
+        hr
+        h3 #{question.numAnswers} Answer(s)
+        .answers.show
+          each answer in answers
+            include _answer
 
-    form(action=`/questions/${question.id}/answers`, method='POST')
-      .form-group
-        label(for='answer') 질문
-        textarea.form-control(name="content", rows="5")
-      button.btn.btn-primary(type="submit") 질문하기
+      form(action=`/questions/${question.id}/answers`, method='POST')
+        .form-group
+          label(for='answer') 이벤트 후기
+          textarea.form-control(name="content", rows="5")
+        button.btn.btn-primary(type="submit") 후기 작성하기
 
   script(src='/javascripts/question_client.js')
 

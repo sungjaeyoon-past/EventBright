@@ -17,7 +17,7 @@ script.
     function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 8,
-    center: {lat: 40.731, lng: -73.997}
+    center: {lat: 37.222275, lng:127.18629199999998}
     });
     var geocoder = new google.maps.Geocoder;
     var infowindow = new google.maps.InfoWindow;
@@ -40,10 +40,10 @@ script.
     infowindow.setContent(results[1].formatted_address);
     infowindow.open(map, marker);
     } else {
-    window.alert('No results found');
+    window.alert('잘못된 위치입니다ㅜㅜ.');
     }
     } else {
-    window.alert('Geocoder failed due to: ' + status);
+    window.alert('이벤트위치가 바다래ㅋㅋ' + status);
     }
     });
     }

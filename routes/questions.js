@@ -193,7 +193,7 @@ router.post('/:id/participate', needAuth, catchErrors(async (req, res, next) => 
     req.flash('danger', 'Not exist question');
     return res.redirect('back');
   }
-  var finduser = await Participate.findOne({email: req.user._id, question: question._id});//??
+  var finduser = await Participate.findOne({author: req.user._id, question: question._id});//??
   if (!finduser){//추가
     if(question.maxPeople>question.numParticipate){
       var participate = new Participate({
