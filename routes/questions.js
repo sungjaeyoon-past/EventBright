@@ -2,6 +2,7 @@ const express = require('express');
 const Question = require('../models/question'); //스키마
 const Answer = require('../models/answer');
 const Review = require('../models/review');
+const AnswerAuthor = require('../models/answer-author');
 const Participate = require('../models/participate');
 const catchErrors = require('../lib/async-error');
 
@@ -186,8 +187,18 @@ router.post('/:id/answers', needAuth, catchErrors(async (req, res, next) => {
   res.redirect(`/questions/${req.params.id}`);
 }));
 
-router.post('/:id/answers/review-author', needAuth, catchErrors(async (req, res, next) => {
- 
+router.post('questions/reviewauthor/:id', needAuth, catchErrors(async (req, res, next) => {
+  /*const user = req.user;
+  const answer = await Answer.findById(req.params.id);
+  var answerauthor = new AnswerAuthor({
+    author: user._id,
+    answer: answer.id,
+    content: req.body.content
+  });
+  console.log(answer._id);
+  await answer.save();
+  req.flash('success', 'Successfully answered');*/
+  res.redirect(`/questions`);
 }));
 
 router.post('/:id/reviews', needAuth, catchErrors(async (req, res, next) => {

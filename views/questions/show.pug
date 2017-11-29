@@ -63,6 +63,7 @@ block content
         .answers.show
           each answer in answers
             include _answer
+            
 
       form(action=`/questions/${question.id}/answers`, method='POST')
         .form-group

@@ -29,5 +29,6 @@ $(document).ready(function(){
     $("h4 > .badge-secondary").click(function(){
         $(".review-authorreview").show();
     });
+    
 
 });
