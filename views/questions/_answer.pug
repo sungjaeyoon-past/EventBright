@@ -1,26 +1,30 @@
 .answer.card
-  .numbers.like-badge
-    .number
-      span.number.num-votes= question.numLikes
-    .button
-      a.like(href='#', data-id=answer.id)
-        i.fa.fa-thumbs-up
-        | 
-        | Like
-
   .card-body
-    .content= answer.content
+    .row
+      .col-md-2
+        | 질문내용 :
+      .col-md-9
+        .content(style="color:black;")= answer.content
+    hr
+    .row
+      .col-md-2
+        .badge.badge-primary
+          | 등록자 답변
+      .col-md-9
+        each arq in answersrequest
+          if answer.id == arq.answer
+            .content(style="color:black;")=arq.content
   .row.card-body
     .col-sm
       h4
-        .badge.badge-secondary
-          | 답변하기
-        .answer-authoranswer
-          form(action=`/questions/${question.id}/answers`, method='POST')
-            .form-group
-              label(for='answer')
-              textarea.form-control(name="content", rows="5", col="8")
-            button.btn.btn-primary(type="submit") 등록
+      .badge.badge-secondary
+        | 답변하기
+      .answer-authoranswer
+        form(action=`/qrequest/${answer.id}/answers`, method='POST')
+          .form-group
+            label(for='answer')
+            textarea.form-control(name="content", rows="5", col="8")
+          button.btn.btn-primary(type="submit") 등록
     .col-sm.text-right
       .author
         | answered on #{moment(answer.createdAt).format('YYYY-MM-DD')}

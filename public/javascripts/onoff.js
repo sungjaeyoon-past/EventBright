@@ -22,12 +22,12 @@ $(document).ready(function(){
     });
 ///
     $(".answer-authoranswer").hide();
-    $("h4 > .badge-secondary").click(function(){
-        $(".answer-authoranswer").show();
+    $(".badge-secondary").click(function(){
+        $(this).next().show();
     });
     $(".review-authorreview").hide();
-    $("h4 > .badge-secondary").click(function(){
-        $(".review-authorreview").show();
+    $(".badge-secondary").click(function(){
+        $(this).next().show();
     });
     
 

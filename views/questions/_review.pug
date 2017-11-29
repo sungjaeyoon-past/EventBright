@@ -1,26 +1,30 @@
 .answer.card
-  .numbers.like-badge
-    .number
-      span.number.num-votes= question.numLikes
-    .button
-      a.like(href='#', data-id=review.id)
-        i.fa.fa-thumbs-up
-        | 
-        | Like
-
   .card-body
-    .content= review.content
+    .row
+      .col-md-2
+        | 후기 내용 :
+      .col-md-9
+        .content(style="color:black;")= review.content
+    hr
+    .row
+      .col-md-2
+        .badge.badge-primary
+          | 등록자 답변
+      .col-md-9
+        each arq in reviewsrequest
+          if review.id == arq.review
+            .content(style="color:black;")=arq.content
   .row.card-body
     .col-sm
         h4
-            .badge.badge-secondary
-                | 답변하기
-            .review-authorreview
-                form(action=`/questions/${question.id}/${answers.id}/review-author`, method='POST')
-                    .form-group
-                        label(for='review-author')
-                        textarea.form-control(name="content", rows="5", col="8")
-                    button.btn.btn-primary(type="submit") 등록
+        .badge.badge-secondary
+            | 답변하기
+        .review-authorreview
+            form(action=`/qrequest/${review.id}/reviews`, method='POST')
+                .form-group
+                    label(for='review-author')
+                    textarea.form-control(name="content", rows="5", col="8")
+                button.btn.btn-primary(type="submit") 등록
     .col-sm.text-right
       .author
         | reviewed on #{moment(review.createdAt).format('YYYY-MM-DD')}

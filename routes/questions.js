@@ -2,7 +2,8 @@ const express = require('express');
 const Question = require('../models/question'); //스키마
 const Answer = require('../models/answer');
 const Review = require('../models/review');
-const AnswerAuthor = require('../models/answer-author');
+const Answerrequest = require('../models/answerrequest');
+const Reviewrequest = require('../models/reviewrequest');
 const Participate = require('../models/participate');
 const catchErrors = require('../lib/async-error');
 
@@ -90,12 +91,16 @@ router.get('/:id/edit', needAuth, catchErrors(async (req, res, next) => {
 router.get('/:id', catchErrors(async (req, res, next) => {
   const question = await Question.findById(req.params.id).populate('author');
   const answers = await Answer.find({question: question.id}).populate('author');
+  const answersrequest = await Answerrequest.find({answers: answers.id}).populate('author');
   const reviews = await Review.find({question: question.id}).populate('author');
-  const participates=await Participate.find({question: question.id}).populate('author'); //
-  question.numReads++;    // TODO: 동일한 사람이 본 경우에 Read가 증가하지 않도록???
+  const reviewsrequest = await Reviewrequest.find({reviews: reviews.id}).populate('author');
+  const participates=await Participate.find({question: question.id}).populate('author');
 
+  question.numReads++;    // TODO: 동일한 사람이 본 경우에 Read가 증가하지 않도록???
+  console.log(answersrequest);
   await question.save();
-  res.render('questions/show', {question: question, answers: answers, reviews:reviews, participates: participates});//
+  res.render('questions/show', {question: question, answers: answers, reviews:reviews, participates: participates,
+    answersrequest: answersrequest, reviewsrequest:reviewsrequest });//
 }));
 
 router.put('/:id', catchErrors(async (req, res, next) => {
@@ -185,20 +190,6 @@ router.post('/:id/answers', needAuth, catchErrors(async (req, res, next) => {
 
   req.flash('success', 'Successfully answered');
   res.redirect(`/questions/${req.params.id}`);
-}));
-
-router.post('questions/reviewauthor/:id', needAuth, catchErrors(async (req, res, next) => {
-  /*const user = req.user;
-  const answer = await Answer.findById(req.params.id);
-  var answerauthor = new AnswerAuthor({
-    author: user._id,
-    answer: answer.id,
-    content: req.body.content
-  });
-  console.log(answer._id);
-  await answer.save();
-  req.flash('success', 'Successfully answered');*/
-  res.redirect(`/questions`);
 }));
 
 router.post('/:id/reviews', needAuth, catchErrors(async (req, res, next) => {
