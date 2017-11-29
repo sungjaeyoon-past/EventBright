@@ -12,9 +12,18 @@
     .content= review.content
   .row.card-body
     .col-sm
+        h4
+            .badge.badge-secondary
+                | 답변하기
+            .review-authorreview
+                form(action=`/questions/${question.id}/${answers.id}/review-author`, method='POST')
+                    .form-group
+                        label(for='review-author')
+                        textarea.form-control(name="content", rows="5", col="8")
+                    button.btn.btn-primary(type="submit") 등록
     .col-sm.text-right
       .author
         | reviewed on #{moment(review.createdAt).format('YYYY-MM-DD')}
         if review.author
           | 
-          | by #[a(href=`/users/${review.author.id}`)= review.author.name]
+          | by #[a(href="")= review.author.name]

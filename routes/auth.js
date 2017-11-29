@@ -23,6 +23,18 @@ module.exports = (app, passport) => {
     }
   );
 
+//카카오톡 로그인
+app.get('/auth/kakao',passport.authenticate('kakao-login'));
+app.get('/auth/kakao/callback',
+  passport.authenticate('kakao-login', {
+    failureRedirect : '/signin',
+    failureFlash : true // allow flash messages
+  }), (req, res, next) => {
+    req.flash('success', 'Welcome!');
+    res.redirect('/questions');
+  }
+);
+
   app.get('/signout', (req, res) => {
     req.logout();
     req.flash('success', 'Successfully signed out');

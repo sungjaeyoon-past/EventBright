@@ -1,4 +1,5 @@
 $(document).ready(function(){
+///
     $(".money-pay-ticket").hide();
 
     $(".row > .classlatlng").hide();
@@ -9,7 +10,7 @@ $(document).ready(function(){
     $(".money-free").click(function(){
         $(".money-pay-ticket").hide();
     });
-
+///
     $(".all-review").hide();
     $(".show-review").click(function(){
         $(".all-answer").hide();
@@ -19,4 +20,14 @@ $(document).ready(function(){
         $(".all-answer").show();
         $(".all-review").hide();
     });
+///
+    $(".answer-authoranswer").hide();
+    $("h4 > .badge-secondary").click(function(){
+        $(".answer-authoranswer").show();
+    });
+    $(".review-authorreview").hide();
+    $("h4 > .badge-secondary").click(function(){
+        $(".review-authorreview").show();
+    });
+
 });

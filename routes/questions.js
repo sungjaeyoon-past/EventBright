@@ -186,6 +186,10 @@ router.post('/:id/answers', needAuth, catchErrors(async (req, res, next) => {
   res.redirect(`/questions/${req.params.id}`);
 }));
 
+router.post('/:id/answers/review-author', needAuth, catchErrors(async (req, res, next) => {
+ 
+}));
+
 router.post('/:id/reviews', needAuth, catchErrors(async (req, res, next) => {
   const user = req.user;
   const question = await Question.findById(req.params.id);

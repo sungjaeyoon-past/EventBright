@@ -12,9 +12,18 @@
     .content= answer.content
   .row.card-body
     .col-sm
+      h4
+        .badge.badge-secondary
+          | 답변하기
+        .answer-authoranswer
+          form(action=`/questions/${question.id}/answers`, method='POST')
+            .form-group
+              label(for='answer')
+              textarea.form-control(name="content", rows="5", col="8")
+            button.btn.btn-primary(type="submit") 등록
     .col-sm.text-right
       .author
         | answered on #{moment(answer.createdAt).format('YYYY-MM-DD')}
         if answer.author
           | 
-          | by #[a(href=`/users/${answer.author.id}`)= answer.author.name]
+          | by #[a(href="")= answer.author.name]
