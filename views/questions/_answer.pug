@@ -2,7 +2,9 @@
   .card-body
     .row
       .col-md-2
-        | 질문내용 :
+        h4
+          .badge.badge-success
+            | 질문내용 
       .col-md-9
         .content(style="color:black;")= answer.content
     hr
@@ -16,15 +18,15 @@
             .content(style="color:black;")=arq.content
   .row.card-body
     .col-sm
-      h4
-      .badge.badge-secondary
-        | 답변하기
-      .answer-authoranswer
-        form(action=`/qrequest/${answer.id}/answers`, method='POST')
-          .form-group
-            label(for='answer')
-            textarea.form-control(name="content", rows="5", col="8")
-          button.btn.btn-primary(type="submit") 등록
+      if currentUser && question.author.id == currentUser.id
+        .badge.badge-secondary
+          | 답변하기
+        .answer-authoranswer
+          form(action=`/qrequest/${answer.id}/answers`, method='POST')
+            .form-group
+              label(for='answer')
+              textarea.form-control(name="content", rows="5", col="8")
+            button.btn.btn-primary(type="submit") 등록
     .col-sm.text-right
       .author
         | answered on #{moment(answer.createdAt).format('YYYY-MM-DD')}

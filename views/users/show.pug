@@ -16,21 +16,27 @@ block content
         dt.col-sm-3 Facebook
         dd.col-sm-9
           img.img-fluid.rounded-circle(src= user.facebook.photo)
-
-    hr
     p
       a.btn.btn-outline-primary(href=`/users/${user._id}/edit`) Edit
       | 
       a.btn.btn-outline-danger.need-confirm-btn(href=`/users/${user._id}?_method=DELETE`) Delete
     hr
   .container
-    .row
-      .col-md-1
-      .col-md-3
-        .alert.alert-primary(style="text-align:center;")
-          | Favorite 목록
-    .alert.alert-info
-      .row  
+
+    .alert.alert-primary(style="text-align:center;")
+      | Favorite 목록     
+    table.table
+      thead.thead-dark
+        tr
+          th(scope='col') 제목
+          th(scope='col') 이동
+      tbody
+        each que in questions
+          tr
+            td 
+              .content=que.title
+            td  
+              a(href=`/questions/${que._id}`) Go!
 
 
 

@@ -2,7 +2,9 @@
   .card-body
     .row
       .col-md-2
-        | 후기 내용 :
+        h4
+          .badge.badge-success
+            | 후기 내용 
       .col-md-9
         .content(style="color:black;")= review.content
     hr
@@ -16,7 +18,7 @@
             .content(style="color:black;")=arq.content
   .row.card-body
     .col-sm
-        h4
+      if currentUser && question.author.id == currentUser.id
         .badge.badge-secondary
             | 답변하기
         .review-authorreview
