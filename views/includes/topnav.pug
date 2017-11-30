@@ -12,8 +12,6 @@
           li.nav-item
             a.nav-link(href="/questions") Browse
           li.nav-item
-            a.nav-link(href="/recommend") Recommend
-          li.nav-item
             a.nav-link(href="/users") Users
           if (!currentUser) 
             li.nav-item
@@ -25,5 +23,12 @@
               a.nav-link(href=`/users/${currentUser._id}`) My Profile
             li.nav-item
               a.nav-link(href='/signout') Signout
+          li.nav-item
+            .dropdown.show
+              a#dropdownMenuLink.btn.btn-secondary.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                | Recommend
+              .dropdown-menu(aria-labelledby='dropdownMenuLink')
+                a.dropdown-item(href='/recommend/calender') Calender
+                a.dropdown-item(href='/recommend/interest') Topic
         
           

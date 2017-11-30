@@ -1,17 +1,7 @@
 extends ../layout
 
 block content
-    .row
-        .col-md-2
-        .col-md-3
-            
-        .col-md-3
-            .btn.btn-primary.btn-lg(style="width:10em;")
-                | 많은 참여
-        .col-md-3
-            .btn.btn-primary.btn-lg(style="width:10em;")
-                | 관심분야
-            .intersting(style="width:70em;")
-                include _interest
-
+    .container
+      include _interest
+    
 

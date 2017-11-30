@@ -1,27 +1,87 @@
 block content
-    .dropdown
-        .btn.btn-secondary.dropdown-toggle(type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") 분야 검색
-        .dropdown-menu
-            a.dropdown-item(href='#') Something else here
-            a.dropdown-item(href='#') Separated link
-            a.dropdown-item(href='#') Apperance or Signing 
-            a.dropdown-item(href='#') Attraction 
-            a.dropdown-item(href='#') Camp, Trip, or Retreat 
-            a.dropdown-item(href='#') Class, Training, or Workshop 
-            a.dropdown-item(href='#') Concert or Performance 
-            a.dropdown-item(href='#') Conference 
-            a.dropdown-item(href='#') Convention 
-            a.dropdown-item(href='#') Dinner or Gala 
-            a.dropdown-item(href='#') Festival or Fair 
-            a.dropdown-item(href='#') Party or Social Gathering 
-            a.dropdown-item(href='#') Game or Competition 
-            a.dropdown-item(href='#') Meeting or network event
-            a.dropdown-item(href='#') Other
-            a.dropdown-item(href='#') Party or social gathering
-            a.dropdown-item(href='#') Race or enduarance event
-            a.dropdown-item(href='#') Rally
-            a.dropdown-item(href='#') Screening
-            a.dropdown-item(href='#') Seminar or talk
-            a.dropdown-item(href='#') Tour
-            a.dropdown-item(href='#') Tournament
-            a.dropdown-item(href='#') Tradeshow, Consumer Show, or Expo
+
+  .jumbotron-fluid(style="text-align:center;")
+  .container
+    h2
+      .btn.btn-outline-success
+        .display-3 Recommend Events for You!
+  .row
+    .col-md-6(style="float:right;")
+      .card.border-success.mb-3
+        .card-header
+          | 참여자 Top 5
+        - var num = 1
+        .card-body
+          table.table
+            thead
+              tr
+                th(scope='col') 순위
+                th(scope='col') 제목
+                th(scope='col') 참여자 수
+                th(scope='col') 보기
+            tbody
+              each quep in questionParticipateMax
+                tr
+                  th(scope='row')
+                    a=num
+                    - num++
+                  td 
+                    .content=quep.title
+                  td 
+                    .content!=quep.numParticipate 
+                  td
+                    a(href=`/questions/${quep._id}`) Go!
+    .col-md-6
+      .card.border-success.mb-3
+        .card-header
+          | 후기 Top 5
+        - var num = 1
+        .card-body
+          table.table
+            thead
+              tr
+                th(scope='col') 순위
+                th(scope='col') 제목
+                th(scope='col') 후기 수
+                th(scope='col') 보기
+            tbody
+              each quep in questionReviewMax
+                tr
+                  th(scope='row')
+                    a=num
+                    - num++
+                  td 
+                    .content=quep.title
+                  td 
+                    .content!=quep.numReviews
+                  td
+                    a(href=`/questions/${quep._id}`) Go!
+  .row
+    .col-md-3
+    .col-md-6
+      .card.border-success.mb-3
+        .card-header
+          | 조회수 Top 5
+        - var num = 1
+        .card-body
+          table.table
+            thead
+              tr
+                th(scope='col') 순위
+                th(scope='col') 제목
+                th(scope='col') 조회 수
+                th(scope='col') 보기
+            tbody
+              each quep in questionReadMax
+                tr
+                  th(scope='row')
+                    a=num
+                    - num++
+                  td 
+                    .content=quep.title
+                  td 
+                    .content!=quep.numReads
+                  td
+                    a(href=`/questions/${quep._id}`) Go!
+  
+  

@@ -115,11 +115,11 @@ block content
       .show-answer
         li.nav-item
           a.nav-link 
-            .btn.btn-primary 질문 보기
+            .btn.btn-outline-success 질문 보기
       .show-review
         li.nav-item
           a.nav-link
-            .btn.btn-primary 후기 보기
+            .btn.btn-outline-info 후기 보기
     hr         
     .all-answer.alert.alert-secondary
       if question.numAnswers > 0
@@ -133,7 +133,7 @@ block content
         .form-group
           label(for='answer') 질문
           textarea.form-control(name="content", rows="5")
-        button.btn.btn-primary(type="submit") 질문하기
+        button.btn.btn-primary(type="submit") 질문 등록
     
     .all-review.alert.alert-secondary
       if question.numReviews > 0
@@ -146,7 +146,7 @@ block content
         .form-group
           label(for='review') 이벤트 후기
           textarea.form-control(name="content", rows="5")
-        button.btn.btn-primary(type="submit") 후기 작성하기
+        button.btn.btn-primary(type="submit") 후기 작성
 
   script(src='/javascripts/question_client.js')
 
