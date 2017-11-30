@@ -38,6 +38,11 @@ block content
                   th(scope="col") Name
                   |       
                   th(scope="col") Email
+                  |
+                  th(scope="col") 소속
+                  |
+                  th(scope="col") 참여 이유
+                  
               |   
               tbody
                 each parPeople in participates
@@ -47,6 +52,10 @@ block content
                       a #{parPeople.author.name}       
                     td
                       a #{parPeople.author.email}
+                    td 
+                      a #{parPeople.answerOrgName}
+                    td
+                      a #{parPeople.answerReason}
         hr 
         form(action=`/questions/${question.id}/participate`, method="POST")             
           if question.survey1
@@ -65,7 +74,7 @@ block content
                 .col-md-4   
                   | 참여자의 소속은 어디입니까?
                 .col-md-5
-                  input.form-control(type='text',name="answerOrg",placeholder="학교 회사 등")
+                  input.form-control(type='text',name="answerOrgName",placeholder="학교 회사 등").
               .row
                 .col-md-2
                   | 참여이유
@@ -80,7 +89,7 @@ block content
                 .col-md-4   
                   .content=question.survey1
                 .col-md-5
-                  input.form-control(type='text')
+                  input.form-control(type='text',name="answerSurvey1")
               if question.survey2
                 .row
                   .col-md-2
@@ -88,7 +97,7 @@ block content
                   .col-md-4
                     .content=question.survey2
                   .col-md-5
-                    input.form-control(type='text')
+                    input.form-control(type='text',name="answerSurvey2")
               if question.survey3
                 .row
                   .col-md-2
@@ -96,17 +105,19 @@ block content
                   .col-md-4 
                     .content=question.survey3
                   .col-md-5
-                    input.form-control(type='text')
+                    input.form-control(type='text',name="answerSurvey3")
           button.btn.btn-success(type="submit") 참여 신청          
     hr
 
     ul.nav.nav-tabs
       .show-answer
         li.nav-item
-          a.nav-link.active 질문 보기
+          a.nav-link 
+            .btn.btn-primary 질문 보기
       .show-review
         li.nav-item
-          a.nav-link.active 후기 보기
+          a.nav-link
+            .btn.btn-primary 후기 보기
     hr         
     .all-answer.alert.alert-secondary
       if question.numAnswers > 0

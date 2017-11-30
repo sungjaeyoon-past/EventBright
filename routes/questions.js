@@ -221,8 +221,13 @@ router.post('/:id/participate', needAuth, catchErrors(async (req, res, next) => 
     if(question.maxPeople>question.numParticipate){
       var participate = new Participate({
         author: user._id,
-        question: question._id
-      }); 
+        question: question._id,
+        answerOrgName:req.body.answerOrgName,
+        answerReason:req.body.answerReason,
+        answerSurvey1:req.body.answerSurvey1,
+        answerSurvey2:req.body.answerSurvey2,
+        answerSurvey3:req.body.answerSurvey3
+      });
       await participate.save();
       question.numParticipate++;
       req.flash('success', '참여 신청 완료');
