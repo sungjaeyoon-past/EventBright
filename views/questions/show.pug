@@ -9,7 +9,7 @@ block content
         .btn.btn-outline-secondary
           | 이벤트 내용 
         .alert.alert-secondary
-          .content= question.content
+          .content!= question.content
       .container
         include _question
       .container
@@ -65,14 +65,14 @@ block content
                 .col-md-4   
                   | 참여자의 소속은 어디입니까?
                 .col-md-5
-                  input.form-control(type='text',name="answerOrg")
+                  input.form-control(type='text',name="answerOrg",placeholder="학교 회사 등")
               .row
                 .col-md-2
                   | 참여이유
                 .col-md-4   
                   | 참여 이유는 무엇입니까?
                 .col-md-5
-                  input.form-control(type='text')
+                  input.form-control(type='text',name="answerReason",placeholder="여가활동 등")
               hr
               .row
                 .col-md-2

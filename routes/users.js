@@ -100,8 +100,7 @@ router.delete('/:id', needAuth, catchErrors(async (req, res, next) => {
 
 router.get('/:id', catchErrors(async (req, res, next) => {
   const user = await User.findById(req.params.id);
-  const likeLog = await Likelog.find({author:user._id});
-  const questions = await Question.find(likeLog._id);
+  const questions = await Likelog.find({author:user._id }).populate('question');
   res.render('users/show', {user: user, questions: questions});
 }));
 

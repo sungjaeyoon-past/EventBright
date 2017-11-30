@@ -34,9 +34,9 @@ block content
         each que in questions
           tr
             td 
-              .content=que.title
+              .content=que.question.title
             td  
-              a(href=`/questions/${que._id}`) Go!
+              a(href=`/questions/${que.question._id}`) Go!
 
 
 

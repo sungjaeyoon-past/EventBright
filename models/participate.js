@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 var schema = new Schema({
   author: { type: Schema.Types.ObjectId, ref: 'User' },
   question: { type: Schema.Types.ObjectId, ref: 'Question' },
-  answerOrg:{type:String},
+  answerOrgName:{type:String},
   answerReason:{type:String},
   answerSurvey1:{type:String},
   answerSurvey2:{type:String},
