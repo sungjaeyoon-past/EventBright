@@ -21,6 +21,9 @@ var schema = new Schema({
   lat:{type:String},
   lng:{type:String},
   //설문
+  survey1:{type:String},
+  survey2:{type:String},
+  survey3:{type:String},
 
   tags: [String],
   numLikes: {type: Number, default: 0},

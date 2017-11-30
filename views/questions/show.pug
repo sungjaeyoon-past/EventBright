@@ -18,9 +18,8 @@ block content
       .buttons
         if currentUser
           button.btn.btn-primary.question-like-btn(data-id=question.id) 
-            span #[i.fa.fa-thumbs-up] Like     
+            span #[i.fa.fa-thumbs-up] Like  
 
-        a.btn.btn-success(href=`/questions/${question.id}/participate?_method=post`) 참여신청
         if currentUser && question.author.id == currentUser.id
           | 
           a.btn.btn-outline-secondary(href=`/questions/${question.id}/edit`) Edit
@@ -48,6 +47,58 @@ block content
                       a #{parPeople.author.name}       
                     td
                       a #{parPeople.author.email}
+        hr 
+        form(action=`/questions/${question.id}/participate`, method="POST")             
+          if question.survey1
+            .alert.alert-secondary
+              .row
+                .col-md-2
+                  | #
+                .col-md-4
+                  | 문항
+                .col-md-5
+                  | 답변
+              hr
+              .row
+                .col-md-2
+                  | 소속
+                .col-md-4   
+                  | 참여자의 소속은 어디입니까?
+                .col-md-5
+                  input.form-control(type='text',name="answerOrg")
+              .row
+                .col-md-2
+                  | 참여이유
+                .col-md-4   
+                  | 참여 이유는 무엇입니까?
+                .col-md-5
+                  input.form-control(type='text')
+              hr
+              .row
+                .col-md-2
+                  | 설문1.
+                .col-md-4   
+                  .content=question.survey1
+                .col-md-5
+                  input.form-control(type='text')
+              if question.survey2
+                .row
+                  .col-md-2
+                    | 설문2.
+                  .col-md-4
+                    .content=question.survey2
+                  .col-md-5
+                    input.form-control(type='text')
+              if question.survey3
+                .row
+                  .col-md-2
+                    | 설문3.
+                  .col-md-4 
+                    .content=question.survey3
+                  .col-md-5
+                    input.form-control(type='text')
+          button.btn.btn-success(type="submit") 참여 신청          
+    hr
 
     ul.nav.nav-tabs
       .show-answer

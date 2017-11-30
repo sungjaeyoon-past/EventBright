@@ -44,7 +44,6 @@ function validateForm(form, options) {
   return null;
 }
 
-/* GET users listing. */
 router.get('/', needAuth, catchErrors(async (req, res, next) => {
   const adminUserId = req.user._id;
   console.log(adminUserId);
@@ -101,7 +100,6 @@ router.delete('/:id', needAuth, catchErrors(async (req, res, next) => {
 
 router.get('/:id', catchErrors(async (req, res, next) => {
   const user = await User.findById(req.params.id);
-  //console.log(Likelog);
   const likeLog = await Likelog.find({author:user._id});
   const questions = await Question.find(likeLog._id);
   res.render('users/show', {user: user, questions: questions});

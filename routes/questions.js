@@ -57,8 +57,6 @@ function validateForm(form, options) {
   return null;
 }
 
-/* GET questions listing. */
-//검색창
 router.get('/', catchErrors(async (req, res, next) => {
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 10;
@@ -96,8 +94,7 @@ router.get('/:id', catchErrors(async (req, res, next) => {
   const reviewsrequest = await Reviewrequest.find({reviews: reviews.id}).populate('author');
   const participates=await Participate.find({question: question.id}).populate('author');
 
-  question.numReads++;    // TODO: 동일한 사람이 본 경우에 Read가 증가하지 않도록???
-  console.log(answersrequest);
+  question.numReads++;
   await question.save();
   res.render('questions/show', {question: question, answers: answers, reviews:reviews, participates: participates,
     answersrequest: answersrequest, reviewsrequest:reviewsrequest });//
@@ -110,13 +107,6 @@ router.put('/:id', catchErrors(async (req, res, next) => {
     req.flash('danger', 'Not exist question');
     return res.redirect('back');
   }
-  /*
-  const err = validateForm(req.body);
-  if (err) {
-    req.flash('danger', err);
-    return res.redirect('back');
-  }
-  */
   question.title = req.body.title;
   question.organizeName = req.body.organizeName;
   question.organizeExp = req.body.organizeExp;
@@ -129,7 +119,6 @@ router.put('/:id', catchErrors(async (req, res, next) => {
   question.ticket = req.body.ticket;
   question.maxPeople = req.body.maxPeople;
   question.content = req.body.content;
-  //question.tags = req.body.tags.split(" ").map(e => e.trim());
 
   await question.save();
   req.flash('success', 'Successfully updated');
@@ -149,6 +138,7 @@ router.post('/', needAuth, catchErrors(async (req, res, next) => {
     req.flash('danger', err);
     return res.redirect('back');
   }
+
   var question = new Question({
     title: req.body.title,
     author: user._id,
@@ -163,8 +153,12 @@ router.post('/', needAuth, catchErrors(async (req, res, next) => {
     finishedAt: req.body.finishedAt,
     ticket: req.body.ticket,
     maxPeople: req.body.maxPeople,
+    survey1:req.body.survey1,
+    survey2:req.body.survey2,
+    survey3:req.body.survey3,
     tags: req.body.tags.split(" ").map(e => e.trim()),
   });
+  console.log(question);
   await question.save();
   req.flash('success', 'Successfully posted');
   res.redirect('/questions');
@@ -214,7 +208,6 @@ router.post('/:id/reviews', needAuth, catchErrors(async (req, res, next) => {
   res.redirect(`/questions/${req.params.id}`);
 }));
 
-//참여신청
 router.post('/:id/participate', needAuth, catchErrors(async (req, res, next) => {
   const user = req.user;
   const question = await Question.findById(req.params.id);
@@ -223,8 +216,8 @@ router.post('/:id/participate', needAuth, catchErrors(async (req, res, next) => 
     req.flash('danger', 'Not exist question');
     return res.redirect('back');
   }
-  var finduser = await Participate.findOne({author: req.user._id, question: question._id});//??
-  if (!finduser){//추가
+  var finduser = await Participate.findOne({author: req.user._id, question: question._id});
+  if (!finduser){
     if(question.maxPeople>question.numParticipate){
       var participate = new Participate({
         author: user._id,

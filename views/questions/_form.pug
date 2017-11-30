@@ -87,7 +87,17 @@
     .col-md-2
       .money-pay-ticket
         label(for="ticket")
-        textarea.form-control(name="ticket", rows="1" )= question.ticket
+        textarea.form-control(name="ticket", rows="1",)= question.ticket
+.form-group
+  .row
+    .col-md-2
+      label(for="startedAt") 시작 날짜
+      input.form-control(type="date", name="startedAt", value=question.startedAt)
+    .col-md-2
+      label(for="finishedAt") 종료 날짜
+      input.form-control(type="date", name="finishedAt", value=question.finishedAt)
+
+hr
 .form-group
   .row
     | 이벤트 장소 : 장소를 클릭해주세요!
@@ -131,21 +141,24 @@
       .lng
         label(for="lng") 경도
         input.form-control(type="text", id="form-lng",name="lng", value=question.finishedAt)
-
-
-.form-group
-  .row
-    .col-md-2
-      label(for="startedAt") 시작 날짜
-      input.form-control(type="date", name="startedAt", value=question.startedAt)
-    .col-md-2
-      label(for="finishedAt") 종료 날짜
-      input.form-control(type="date", name="finishedAt", value=question.finishedAt)
-
+hr
 .form-group
   label(for="question") 이벤트 내용
   textarea#myTextarea.form-control(name="content", rows="30")= question.content
-
+hr
+.form-group
+  | 참여자 설문조사 ( 3문항 까지 가능 - 소속, 참여이유 등 )
+  .btn.btn-outline-primary.addsurvey
+    | 문항 추가
+  .survey1
+    textarea#myTextarea.form-control(name="survey1", rows="1" col="10")= question.survey1
+    hr
+  .survey2
+    textarea#myTextarea.form-control(name="survey2", rows="1" col="10")= question.survey2
+    hr
+  .survey3
+    textarea#myTextarea.form-control(name="survey3", rows="1" col="10")= question.survey3
+    hr
 
 .form-group
   label(for="tags") 태그

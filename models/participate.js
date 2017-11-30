@@ -5,6 +5,11 @@ const Schema = mongoose.Schema;
 var schema = new Schema({
   author: { type: Schema.Types.ObjectId, ref: 'User' },
   question: { type: Schema.Types.ObjectId, ref: 'Question' },
+  answerOrg:{type:String},
+  answerReason:{type:String},
+  answerSurvey1:{type:String},
+  answerSurvey2:{type:String},
+  answerSurvey3:{type:String}
 }, {
   toJSON: { virtuals: true},
   toObject: {virtuals: true}
