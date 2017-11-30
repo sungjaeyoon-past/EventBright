@@ -97,6 +97,43 @@
       label(for="finishedAt") 종료 날짜
       input.form-control(type="date", name="finishedAt", value=question.finishedAt)
 
+.form-group
+  label(for="question") 이벤트 내용
+  textarea#myTextarea.form-control(name="content", rows="30")= question.content
+.form-group
+  label(for="img") Image
+  input#file.form-control(type="file")
+  input#url.form-control(type="text", readonly="readonly", name="img", value="")
+  img#preview.img-fluid(src="https://dummyimage.com/200x200/ccc/fff")
+
+script.
+  $(function() {
+    $("#preview").hide();
+    $("#file").change(function() {
+      var file = $("#file")[0].files[0];
+      if (file) {
+        var url = "/s3?filename=" + encodeURIComponent(file.name) + 
+                  "&type=" + encodeURIComponent(file.type);
+        console.log(url);
+        $.getJSON(url, function(resp) {
+          console.log(resp.signedRequest);
+          $.ajax({
+            url: resp.signedRequest,
+            method: 'PUT',
+            data: file,
+            headers: {'x-amz-acl': 'public-read', 'Content-Type': file.type},
+            processData: false, 
+            contentType: file.type,
+            success: function() {
+              $("#preview").attr("src", resp.url).show();
+              $("#url").val(resp.url);
+            }
+          });
+        });
+      }
+    });
+  });
+
 hr
 .form-group
   .row
@@ -141,10 +178,6 @@ hr
       .lng
         label(for="lng") 경도
         input.form-control(type="text", id="form-lng",name="lng", value=question.finishedAt)
-hr
-.form-group
-  label(for="question") 이벤트 내용
-  textarea#myTextarea.form-control(name="content", rows="30")= question.content
 hr
 .form-group
   | 참여자 설문조사 ( 3문항 까지 가능 - 소속, 참여이유 등 )

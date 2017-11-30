@@ -13,7 +13,7 @@ var schema = new Schema({
   maxPeople:{type:Number, default:100},
   numParticipate:{type:Number, default:0},
   participateName:{type:Array},
- // img:{type:String},
+  img:{type:String},
   startedAt: {type: String},
   finishedAt: {type: String},
   eventSort:{type:String , default:" - "},

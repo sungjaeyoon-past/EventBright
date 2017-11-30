@@ -149,6 +149,7 @@ router.post('/', needAuth, catchErrors(async (req, res, next) => {
     eventTopic:req.body.eventTopic,
     lat:req.body.lat,
     lng:req.body.lng,
+    img:req.body.img,
     startedAt: req.body.startedAt,
     finishedAt: req.body.finishedAt,
     ticket: req.body.ticket,
