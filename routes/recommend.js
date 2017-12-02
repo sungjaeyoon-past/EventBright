@@ -6,11 +6,6 @@ var router = express.Router();
 const catchErrors = require('../lib/async-error');
 
 
-router.get('/calender', catchErrors(async (req, res, next) => {
-  const users = await User.find({});
-  res.render('recommend/calender');
-}));
-
 router.get('/interest', catchErrors(async (req, res, next) => {
   const users = await User.find({});
   const questionParticipateMax = await Question.find().sort({numParticipate:-1}).limit(5);

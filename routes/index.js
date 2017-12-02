@@ -11,6 +11,20 @@ router.get('/', catchErrors(async (req, res, next) => {
   res.render('index', {users: users});
 }));
 
+router.get("/reset-password",catchErrors(async(req,res,next)=>{
+  res.render("forgot");
+}));
+
+router.post("/reset-password/reset",catchErrors(async(req,res,next)=>{
+  req.flash("success","이메일로 온 인증번호를 입력해주세요!")
+  res.render("");/*입력창으로*/ 
+}));
+/*입력후 보낼곳*/
+
+/*비밀번호 재설정*/
+
+
+
 // 1. 아래의 AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY 는 
 //    AWS의 IAM에서 새로운 사용자를 추가해서 받아야 함!
 // 2. S3_BUCKET은 AWS의 S3에서 새로 생성해서 만들어야 함

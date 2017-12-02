@@ -18,6 +18,7 @@ var schema = new Schema({
   finishedAt: {type: String},
   eventSort:{type:String , default:" - "},
   eventTopic:{type:String , default:" - "},
+  map:{type:String},
   lat:{type:String},
   lng:{type:String},
   //설문

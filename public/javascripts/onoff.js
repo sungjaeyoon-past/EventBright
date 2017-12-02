@@ -33,10 +33,14 @@ $(document).ready(function(){
     for(var i=1;i<4;i++){
         $(".survey"+i).hide();
     }
-var num=1;
-$(".addsurvey").click(function(){
-    $(".survey"+num).show();
-    num++;
-});
-
+    var num=1;
+    $(".addsurvey").click(function(){
+        $(".survey"+num).show();
+        num++;
+    });
+//
+    $("#kCalendar").hide();
+    $(".showcalender").click(function(){
+        $("#kCalendar").show();
+    });
 });

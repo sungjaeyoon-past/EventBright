@@ -8,10 +8,19 @@ block content
   .container
     form.form-inline.search-input-group(action='/questions', method='GET')
       i.fa.fa-search
-      input.form-control.mr-sm-2(type='text', name='term', placeholder='Search', aria-label='Search', value=term)
-
-      
-      .btn.btn-primary(type="submit") 검색
+      input.form-control.mr-sm-2#sercal(type='text', name='term', placeholder='제목, 종류, 분야, 지역, 내용 검색가능', aria-label='Search', value=term)
+  .container
+    .row
+      .col-md-2
+      .col-md-8(style="text-align:center;")
+        .btn.btn-success.showcalender
+          | 달력 으로 검색
+       
+    #kCalendar
+    script.
+      window.onload = function () {
+        kCalendar('kCalendar');
+      };
 
     h1.main-title 
       if questions.total > 0
@@ -21,6 +30,7 @@ block content
       .alert.alert-info 아직 이벤트가 없습니다.
     else
       .questions
+
         each question in questions.docs
           .question
             .row

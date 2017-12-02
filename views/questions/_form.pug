@@ -92,10 +92,10 @@
   .row
     .col-md-2
       label(for="startedAt") 시작 날짜
-      input.form-control(type="date", name="startedAt", value=question.startedAt)
+      input.form-control(type="date", name="startedAt")
     .col-md-2
       label(for="finishedAt") 종료 날짜
-      input.form-control(type="date", name="finishedAt", value=question.finishedAt)
+      input.form-control(type="date", name="finishedAt")
 
 .form-group
   label(for="question") 이벤트 내용
@@ -173,14 +173,19 @@ hr
     .col-md-2
       .lat
         label(for="lat") 위도
-        input.form-control(type="text", id="form-lat", name="lat", value=question.startedAt)
+        input.form-control(type="text", id="form-lat", name="lat")
     .col-md-2
       .lng
         label(for="lng") 경도
-        input.form-control(type="text", id="form-lng",name="lng", value=question.finishedAt)
+        input.form-control(type="text", id="form-lng",name="lng")
+.form-group
+  .row
+    .col-md-8
+      label(for="lat") 상세 주소를 입력해주세요!
+      input.form-control(type="text", id="form-map", name="map")
 hr
 .form-group
-  | 참여자 설문조사 ( 3문항 까지 가능 - 소속, 참여이유 등 )
+  | 참여자 설문조사 ( 3문항 까지 가능 - 소속, 참여이유는 이미 포함되어있습니다! )
   .btn.btn-outline-primary.addsurvey
     | 문항 추가
   .survey1

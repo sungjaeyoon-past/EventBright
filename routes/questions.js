@@ -66,9 +66,15 @@ router.get('/', catchErrors(async (req, res, next) => {
   if (term) {
     query = {$or: [
       {title: {'$regex': term, '$options': 'i'}},
-      {content: {'$regex': term, '$options': 'i'}}
+      {content: {'$regex': term, '$options': 'i'}},
+      {eventSort: {'$regex': term, '$options': 'i'}},
+      {eventTopic: {'$regex': term, '$options': 'i'}},
+      {map: {'$regex': term, '$options': 'i'}},
+      {startedAt: {'$regex': term, '$options': 'i'}} 
     ]};
   }
+  console.log(term);
+  console.log(query);
   const questions = await Question.paginate(query, {
     sort: {createdAt: -1}, 
     populate: 'author', 
@@ -96,6 +102,7 @@ router.get('/:id', catchErrors(async (req, res, next) => {
 
   question.numReads++;
   await question.save();
+  console.log(question);
   res.render('questions/show', {question: question, answers: answers, reviews:reviews, participates: participates,
     answersrequest: answersrequest, reviewsrequest:reviewsrequest });//
 }));
@@ -112,8 +119,8 @@ router.put('/:id', catchErrors(async (req, res, next) => {
   question.organizeExp = req.body.organizeExp;
   question.eventSort = req.body.eventSort;
   question.eventTopic = req.body.eventTopic;
-  question.lat=req.body.lat,
-  question.lng=req.body.lng,
+  question.lat=req.body.lat;
+  question.lng=req.body.lng;
   question.startedAt = req.body.startedAt;
   question.finishedAt = req.body.finishedAt;
   question.ticket = req.body.ticket;
@@ -147,6 +154,7 @@ router.post('/', needAuth, catchErrors(async (req, res, next) => {
     organizeExp: req.body.organizeExp,
     eventSort:req.body.eventSort,
     eventTopic:req.body.eventTopic,
+    map:req.body.map,
     lat:req.body.lat,
     lng:req.body.lng,
     img:req.body.img,

@@ -16,6 +16,11 @@ block content
         include _question
       .container
         include map
+        .row  
+          .col-md-2
+            |상세주소 : 
+          .col-md-7 
+            .content= question.map
 
       .buttons
         if currentUser
