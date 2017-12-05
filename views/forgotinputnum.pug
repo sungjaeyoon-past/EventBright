@@ -14,7 +14,15 @@ block content
             .row
                 .col-md-4
                 .col-md-4
-                    | 이메일로 온 8자리 넘버 입력
+                    | 이메일의 넘버 입력
                     label(for='inputnumber')
                     input#exampleFormControlInput1.form-control(type='string',name="inputnumber", placeholder='0000')
+
+        .form-group
+            .row
+                .col-md-4
+                .col-md-4
+                    | 재설정할 비밀번호
+                    label(for='password')
+                    input#exampleFormControlInput1.form-control(type='string',name="password")
                     button.btn.btn-primary(type="submit") 제출

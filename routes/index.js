@@ -3,8 +3,6 @@ const User = require('../models/user');
 var router = express.Router();
 const catchErrors = require('../lib/async-error');
 
-
-
 /* GET home page. */
 router.get('/', catchErrors(async (req, res, next) => {
   const users = await User.find({});
@@ -14,56 +12,59 @@ router.get('/', catchErrors(async (req, res, next) => {
 router.get("/reset-password",catchErrors(async(req,res,next)=>{
   res.render("forgot");
 }));
+
 //이메일 입력후 넘버발송
 router.post("/reset-password/reset",catchErrors(async(req,res,next)=>{
   var useremail=req.body.email;
   var finduser=await User.findOne({email:useremail});
- // console.log(finduser);
   if(!finduser){
     req.flash('danger', '이메일을 가진 사용자가 없습니다!');
     res.redirect('back');
   }
   var randomNumber=parseInt(Math.random()*100000000);
-  console.log(randomNumber);
   finduser.resetNumber=randomNumber;//랜덤넘버 발급
-  console.log(finduser);
+  await finduser.save();
   //이메일 전송 + randomnumber
-
+  var mailgun = require("mailgun-js");
+  var api_key = 'key-ffa4238a4a33543e31b73b58c0049efa';
+  var DOMAIN = 'sandbox407f003c6b2b4a29b1a770615a1000f0.mailgun.org';
+  var mailgun = require('mailgun-js')({apiKey: api_key, domain: DOMAIN});
   var data = {
     from: 'Excited User <me@samples.mailgun.org>',
     to: useremail,
-    subject: '리셋넘버는' + randomNumber + "입니다. 입력창에서 입력해주세요",
-    text: 'Testing some Mailgun awesomness!'
+    subject: '패스워드 재설정 이메일',
+    text: '넘버는  ' + randomNumber + '  입니다. 입력창에서 입력해주세요'
   };
 
-  mailgun.messages().send(data, function (error, body) {
-    console.log(body);
+  await mailgun.messages().send(data, function (error, body) {
   });
-
-  req.flash("success","이메일로 온 인증번호를 입력해주세요!")
-  res.render("reset");/*입력창으로*/ 
+  res.render("forgotinputnum");/*입력창으로*/ 
 }));
+
 //발송된 넘버 확인
 router.post("/reset-password/submit",catchErrors(async(req,res,next)=>{
   var useremail=req.body.email;
   var finduser=await User.findOne({email:useremail});
+  var number=finduser.resetNumber;
+  //console.log(number+"------\n");
   if(!finduser){
     req.flash('danger', '이메일이 잘못되었습니다!');
-    res.redirect('back');
+    res.render("forgotinputnum");
   }
-  if(finduser.resetNumber==req.body.inputnumber){//맞음 -> edit로 보냄
-    
-  /*
-  user.password = await user.generateHash(req.body.password);
-  await user.save();
-  req.flash('success', '비밀번호가 재설정되었습니다.');
-  res.redirect('/');
-   */ 
+  //console.log("설정된거:"+finduser.resetNumber+"\n");
+  //console.log("날라간거:"+req.body.inputnumber+"\n");
+  if(finduser.resetNumber==req.body.inputnumber){//맞음 -> edit
+    finduser.password = await finduser.generateHash(req.body.password);
+    await finduser.save();
+    req.flash('success', '비밀번호가 재설정되었습니다.');
+    res.render("index");
   }else{
-    req.flash('danger', '넘버가 다릅니다!');
-    res.redirect('back');
+    req.flash('danger', '번호가 다릅니다!');
+    res.render("forgotinputnum");
   }
 }));
+
+
 
 
 /*입력후 보낼곳*/
