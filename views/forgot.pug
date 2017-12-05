@@ -1,11 +1,13 @@
 extends layout
 
-block content   
+block content  
     form(action=`/reset-password/reset`, method='POST')
         .form-group
             .row
                 .col-md-4
                 .col-md-4
-                    label(for='exampleFormControlInput1') Email address
-                    input#exampleFormControlInput1.form-control(type='email', placeholder='name@example.com')
+                    | 비밀번호를 찾을 사용자의 이메일 입력
+                    hr
+                    label(for='email')
+                    input#exampleFormControlInput1.form-control(type='email',name="email", placeholder='name@example.com')
                     button.btn.btn-primary(type="submit") 이메일 발송

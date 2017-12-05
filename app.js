@@ -16,6 +16,11 @@ var questions = require('./routes/questions');
 var recommend = require('./routes/recommend');
 var qrequest = require('./routes/qrequest');
 var passportConfig = require('./lib/passport-config');
+//mailgun
+var mailgun = require("mailgun-js");
+var api_key = 'key-ffa4238a4a33543e31b73b58c0049efa';
+var DOMAIN = 'localhost:3000';
+var mailgun = require('mailgun-js')({apiKey: api_key, domain: DOMAIN});
 
 var app = express();
 

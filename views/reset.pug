@@ -1,0 +1,20 @@
+extends layout
+
+block content  
+    form(action=`/reset-password/submit`, method='POST')
+        .form-group
+            .row
+                .col-md-4
+                .col-md-4
+                    | 랜덤넘버를 발급한 사용자의 이메일 입력
+                    hr
+                    label(for='email')
+                    input#exampleFormControlInput1.form-control(type='email',name="email", placeholder='name@example.com')
+        .form-group
+            .row
+                .col-md-4
+                .col-md-4
+                    | 이메일로 온 8자리 넘버 입력
+                    label(for='inputnumber')
+                    input#exampleFormControlInput1.form-control(type='string',name="inputnumber", placeholder='0000')
+                    button.btn.btn-primary(type="submit") 제출
