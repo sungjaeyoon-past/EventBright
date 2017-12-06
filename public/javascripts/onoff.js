@@ -43,4 +43,7 @@ $(document).ready(function(){
     $(".showcalender").click(function(){
         $("#kCalendar").show();
     });
+
+    $('.dropdown-toggle').dropdown(); 
+    //$().dropdown('update')
 });

@@ -45,9 +45,9 @@ function validateForm(form, options) {
 }
 
 router.get('/', needAuth, catchErrors(async (req, res, next) => {
-  const adminUserId = req.user._id;
-  console.log(adminUserId);
-  if(adminUserId!="5a1d9b01a84473469045a6a7" && adminUserId!="5a1db1a4ab28df364c9ab8c2" ){
+  const adminUserEmail=req.user.email;
+  console.log(req.user.email+"---------------\n");
+  if(adminUserEmail!="dbstjdwo1000@naver.com" && adminUserEmail!="admin@admin.com" ){
     req.flash('danger', '관리자만 가능!');
     res.redirect('back');
   }

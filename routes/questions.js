@@ -29,6 +29,7 @@ function validateForm(form, options) {
   var finishedAt = form.finishedAt || "";
   var content = form.content || "";
   var lat= form.content || "";
+  var map=form.map || "";
 
   if (!title) {
     return '제목을 입력해주세요!';
@@ -54,27 +55,51 @@ function validateForm(form, options) {
   if (!content) {
     return '이벤트 내용을 입력해주세요!';
   }
+  if (!map) {
+    return '상세 주소를 입력해주세요!';
+  }
+  return null;
+}
+function validateFormParticipate(form, options) {
+  var answerOrgName = form.answerOrgName || "";
+  var answerReason = form.answerReason || "";
+  if (!answerOrgName) {
+    return '소속은 필수 입력 값입니다!';
+  }
+  if (!answerReason) {
+    return '참여이유를 적어주세요!';
+  }
   return null;
 }
 
 router.get('/', catchErrors(async (req, res, next) => {
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 10;
-
   var query = {};
   const term = req.query.term;
+  const sort = req.query.sort;
+  var searchdate=req.query.searchdate;
+
   if (term) {
-    query = {$or: [
-      {title: {'$regex': term, '$options': 'i'}},
-      {content: {'$regex': term, '$options': 'i'}},
-      {eventSort: {'$regex': term, '$options': 'i'}},
-      {eventTopic: {'$regex': term, '$options': 'i'}},
-      {map: {'$regex': term, '$options': 'i'}},
-      {startedAt: {'$regex': term, '$options': 'i'}} 
-    ]};
+    if(sort=="제목"){
+      query = {$or: [ {title: {'$regex': term, '$options': 'i'}} ]};
+    }
+    if(sort=="내용"){
+      query = {$or: [ {content: {'$regex': term, '$options': 'i'}} ]};
+    }
+    if(sort=="종류"){
+      query = {$or: [ {eventSort: {'$regex': term, '$options': 'i'}} ]};
+    }
+    if(sort=="분야"){
+      query = {$or: [ {eventTopic: {'$regex': term, '$options': 'i'}} ]};
+    }
+    if(sort=="지역"){
+      query = {$or: [ {map: {'$regex': term, '$options': 'i'}} ]};
+    }
+  }else if(searchdate){
+    query = {$and: [ {startedAt: {'$gte': searchdate, "$lte":"2080-12-31"} }]};
+    req.flash('success', '시작날짜가 누른 날짜의 이후인 이벤트가 보여집니다!');
   }
-  console.log(term);
-  console.log(query);
   const questions = await Question.paginate(query, {
     sort: {createdAt: -1}, 
     populate: 'author', 
@@ -145,7 +170,12 @@ router.post('/', needAuth, catchErrors(async (req, res, next) => {
     req.flash('danger', err);
     return res.redirect('back');
   }
-
+  var reqticket
+  if(!req.body.ticket){
+    reqticket=0;
+  }else{
+    reqticket=req.body.ticket;
+  }
   var question = new Question({
     title: req.body.title,
     author: user._id,
@@ -160,7 +190,7 @@ router.post('/', needAuth, catchErrors(async (req, res, next) => {
     img:req.body.img,
     startedAt: req.body.startedAt,
     finishedAt: req.body.finishedAt,
-    ticket: req.body.ticket,
+    ticket: reqticket,
     maxPeople: req.body.maxPeople,
     survey1:req.body.survey1,
     survey2:req.body.survey2,
@@ -220,7 +250,11 @@ router.post('/:id/reviews', needAuth, catchErrors(async (req, res, next) => {
 router.post('/:id/participate', needAuth, catchErrors(async (req, res, next) => {
   const user = req.user;
   const question = await Question.findById(req.params.id);
-
+  const err = validateFormParticipate(req.body);
+  if (err) {
+    req.flash('danger', err);
+    return res.redirect('back');
+  }
   if (!question) {
     req.flash('danger', 'Not exist question');
     return res.redirect('back');

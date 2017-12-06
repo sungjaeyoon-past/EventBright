@@ -4,11 +4,23 @@ include ../includes/_paginate
 
 block content
   h1.main-title 
-    | 이벤트를 찾아보세요!  
-  .container
-    form.form-inline.search-input-group(action='/questions', method='GET')
-      i.fa.fa-search
-      input.form-control.mr-sm-2#sercal(type='text', name='term', placeholder='제목, 종류, 분야, 지역, 내용 검색가능', aria-label='Search', value=term)
+    | 이벤트를 찾아보세요!
+  .container  
+      .row
+        form.form-inline.search-input-group(action='/questions', method='GET')
+          .col-lg-2
+          .col-lg-2
+            .input-group
+              select#inputState.form-control(name="sort")
+                .choose-browsesort
+                  option(selected="제목", name="sort") 제목
+                  option(selected="종류 ", name="sort") 종류
+                  option(selected="분야 ", name="sort") 분야
+                  option(selected="지역 ", name="sort") 지역 
+                  option(selected="내용 ", name="sort") 내용
+          .col-lg-6
+            i.fa.fa-search(style="margin-left:0.8em;")
+            input.form-control.mr-sm-2#sercal(type='text', name='term', placeholder='검색항목', aria-label='Search')
   .container
     .row
       .col-md-2

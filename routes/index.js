@@ -35,7 +35,7 @@ router.post("/reset-password/reset",catchErrors(async(req,res,next)=>{
     subject: '패스워드 재설정 이메일',
     text: '넘버는  ' + randomNumber + '  입니다. 입력창에서 입력해주세요'
   };
-
+  console.log(data);
   await mailgun.messages().send(data, function (error, body) {
   });
   res.render("forgotinputnum");/*입력창으로*/ 

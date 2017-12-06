@@ -89,7 +89,8 @@ function kCalendar(id, date) {
             return;
         }
         //alert(currentYear+" "+currentMonth+" "+day);
-        $("#sercal").val(currentYear+"-"+currentMonth+"-"+day);        
+		$("#sercal").val(currentYear+"-"+currentMonth+"-"+day); 
+		$(location).attr('href', '/questions?searchdate='+currentYear+"-"+currentMonth+"-"+day); 
     });
     
 }

@@ -9,9 +9,9 @@
       a.organizeExp= question.organizeExp
     .col-md-7
       | 기간 :
-      a.startedAt= question.startedAt
+      a.startedAt #{moment(question.startedAt).format('YYYY-MM-DD')}
       |  ~ 
-      a.finishedAt= question.finishedAt
+      a.finishedAt #{moment(question.finishedAt).format('YYYY-MM-DD')}
   .row
     .col-md-5
       | 종류 :
