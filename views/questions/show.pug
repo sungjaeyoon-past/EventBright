@@ -24,7 +24,7 @@ block content
 
       .buttons
         if currentUser
-          button.btn.btn-primary.question-like-btn(data-id=question.id) 
+          button.btn.btn-primary.question-like-btn(data-id=question.id)
             span #[i.fa.fa-thumbs-up] Like  
 
         if currentUser && question.author.id == currentUser.id
@@ -49,6 +49,15 @@ block content
                   th(scope="col") 소속
                   |
                   th(scope="col") 참여 이유
+                  |
+                  if question.survey1
+                    th(scope="col") 설문1
+                  |
+                  if question.survey2
+                    th(scope="col") 설문2
+                  |
+                  if question.survey3
+                    th(scope="col") 설문3
                   
               |   
               tbody
@@ -63,6 +72,15 @@ block content
                       a #{parPeople.answerOrgName}
                     td
                       a #{parPeople.answerReason}
+                    if question.survey1
+                      td
+                        a #{parPeople.answerSurvey1}
+                    if question.survey2
+                      td
+                        a #{parPeople.answerSurvey2}
+                    if question.survey1
+                      td
+                        a #{parPeople.answerSurvey3}
         hr 
         form(action=`/questions/${question.id}/participate`, method="POST")             
           .alert.alert-secondary

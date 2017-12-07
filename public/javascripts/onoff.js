@@ -41,6 +41,7 @@ $(document).ready(function(){
 //
     $("#kCalendar").hide();
     $(".showcalender").click(function(){
+        alert("시작날짜가 누르신 날짜 이후인 이벤트들이 보여집니다!");
         $("#kCalendar").show();
     });
 

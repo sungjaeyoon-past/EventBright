@@ -98,7 +98,6 @@ router.get('/', catchErrors(async (req, res, next) => {
     }
   }else if(searchdate){
     query = {$and: [ {startedAt: {'$gte': searchdate, "$lte":"2080-12-31"} }]};
-    req.flash('success', '시작날짜가 누른 날짜의 이후인 이벤트가 보여집니다!');
   }
   const questions = await Question.paginate(query, {
     sort: {createdAt: -1}, 

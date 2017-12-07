@@ -19,6 +19,7 @@ $(function() {
           console.log(data, status);
         },
         complete: function(data) {
+          alert("반영되었습니다.");
           $el.removeClass('loading');
         }
       });
